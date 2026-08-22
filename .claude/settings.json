@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "seo-engine": {
+      "source": {
+        "source": "github",
+        "repo": "mikefutia/seo-plugin"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "seo-engine@seo-engine": true
+  }
+}
