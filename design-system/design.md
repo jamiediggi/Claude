@@ -237,20 +237,111 @@ soft orange glow (18% at 50px blur) may sit behind one edge. One per panel, neve
 
 ---
 
-## 7. Imagery & illustration
+## 7. Illustration
 
-Three image types, and nothing else:
+One recurring character does all the explaining. He is drawn in black ink on white, wears a baseball
+cap in every frame, and never changes proportions between drawings. That consistency is what makes
+the illustrations read as a set rather than a pile of clip art.
 
-1. **Stick-figure illustrations** — hand-drawn line figures on transparent backgrounds that make an
-   idea land (the jigsaw with no picture on the box; the half-built bridges). Navy line work, one
-   accent colour maximum, always captioned in `navy/45`.
-2. **Photography of Jamie** — real and unposed. Portraits crop 4:5 on mobile, 3:4 on desktop, 16px
+### Anatomy
+
+![Anatomy of the stick figure: round head, baseball cap, four head-heights tall, black ink only](./illustrations/anatomy.svg)
+
+| Feature | Rule |
+|---------|------|
+| Head | Round, slightly oversized relative to the body. White/empty inside, black outline. |
+| Cap | Baseball cap **always** present. White with black cross-hatching. Never coloured. |
+| Face | Small dot eyes, curved line mouth, short angled eyebrows. No nose, no ears. |
+| Height | Roughly 3.5–4 head-heights tall. Head diameter is the unit for everything else. |
+| Colour | Black ink on white only. The character is never coloured, and neither is any other figure. |
+| Scale | Realistic human scale against the scene. Next to a lighthouse, the lighthouse towers over him. |
+| Extras | Other stick figures in a scene are smaller and simpler than the main character. |
+
+### Examples
+
+| | |
+|---|---|
+| ![Stick figure holding a jigsaw piece beside a box with no picture on it](./illustrations/jigsaw.svg) | ![Stick figure on a ledge looking at three bridges, only one reaching the far side](./illustrations/bridges.svg) |
+| **Marketing without a plan** — a jigsaw with no picture on the box. One prop, one metaphor, nothing else in frame. | **Half-built bridges** — three attempts, one that lands. The finished bridge is the only orange element: the accent marks the answer, not the problem. |
+| ![Stick figure walking past six numbered stage posts rising towards a flag](./illustrations/stages.svg) | ![Stick figure holding a megaphone with sound lines coming out of it](./illustrations/noticed.svg) |
+| **The six stages** — the Perfect Customer Journey as posts rising towards a flag. Numbers alternate orange and navy; the sequence is the message. | **Get Noticed** — stage one on its own. Sound lines navy, megaphone orange, character untouched. |
+
+Source files live in [`illustrations/`](./illustrations/) as SVG.
+
+### Never
+
+- No colour on the character — not his cap, not his clothes, not another stick figure.
+- No third accent colour. Orange and navy only, on props and environment.
+- No nose, no ears, no hair.
+- No 3D, no photorealism, no clip art. Cartoon line illustration only.
+- No long text in the artwork. Labels are short and bold, or they don't go in.
+
+Colour stays sparing: a mostly black-and-white frame with a few accented objects is the target. If
+the whole scene is orange, the accent has stopped meaning anything.
+
+### Generation prompt
+
+New illustrations are generated from the reference set with the prompt below. **Attach the existing
+images every time** — they are the definitive guide, and the prompt only holds if the model can see
+them.
+
+```text
+VISUAL STYLE INSTRUCTIONS
+
+You generate stick figure illustrations based on prompts I give you. Your only job is to
+create the image while keeping the character and style 100% consistent with the attached
+reference images.
+
+THE CHARACTER
+Study the attached reference images. This is the definitive guide. Match it exactly every
+time. Key details that must never change:
+  - Round head, slightly oversized relative to body. White/empty inside, black outline.
+  - Baseball cap ALWAYS present. White with black cross-hatching/sketch shading lines.
+    Never coloured.
+  - Simple face: small dot eyes, curved line mouth, short angled eyebrows. No nose, no ears.
+  - Roughly 3.5-4 head-heights tall.
+  - NEVER add any colour to the character. He is black ink on white only.
+
+PROPORTIONS
+The character must always be at realistic human scale relative to the objects and
+environment around him. If he's next to a lighthouse, the lighthouse towers over him. If
+he's at a desk, he's normal desk height. Don't make him oversized relative to the scene.
+
+COLOURS
+Only two accent colours are ever permitted (plus black and white):
+  #E4623E (warm orange-red)
+  #1A4081 (deep navy blue)
+These go on objects, props, and environmental elements ONLY. Never on the character or
+other stick figures. Use them sparingly - a few coloured accents on a mostly black and
+white image is the goal.
+
+STYLE
+  - Clean white background
+  - Black ink pen, hand-drawn feel with slight imperfection
+  - Cartoon/illustration style, not clipart, not 3D, not photorealistic
+  - Other stick figures in the scene should be simpler and smaller than the main character
+  - Keep any text labels short and bold
+
+THE PERFECT CUSTOMER JOURNEY
+If the PCJ, Perfect Customer Journey or stages are mentioned, they are the 6 stages:
+  1. Get Noticed   2. Connect       3. Engage
+  4. Convert       5. Deliver & Wow  6. Create Fans
+```
+
+> **One thing to settle.** The illustration prompt uses `#E4623E` / `#1A4081`, while the website ships
+> `#E2613D` / `#1B3C7F`. They are a shade apart — close enough to look like a mistake side by side,
+> far enough that an illustration dropped next to a button won't quite match. Pick one pair and use it
+> in both places; the site's values are the safer default, since they're already compiled into the
+> build.
+
+### Other imagery
+
+1. **Photography of Jamie** — real and unposed. Portraits crop 4:5 on mobile, 3:4 on desktop, 16px
    radius. No stock photography of other people, ever.
-3. **Product screenshots** — 2:1 well on cream, square to the frame. No perspective mockups, no
+2. **Product screenshots** — 2:1 well on cream, square to the frame. No perspective mockups, no
    floating device shells.
-
-Decorative shapes (the soft orange blur behind a hero, a rotated cream slab behind a portrait) run at
-5–10% opacity and never sit behind body text.
+3. **Decorative shapes** — the soft orange blur behind a hero, a rotated cream slab behind a
+   portrait: 5–10% opacity, never behind body text.
 
 Alt text describes the idea, not the file: *"Stick figure looking at three bridges — only one fully
 built across the gap."*
@@ -405,3 +496,10 @@ Colours, fonts, radii, shadow offsets and transition timings are read from the b
 approximated. Section padding, tap-target minimums and the voice rules are documented conventions
 inferred from consistent use across the homepage — worth confirming before treating them as hard
 constraints on a new page type.
+
+The illustrations in section 7 were drawn to the written character spec (round head, cross-hatched
+cap, four head-heights, ink-only figure, accents on props) so the constraints are visible rather than
+just described. They are a **specification reference, not the house artwork** — the real reference
+set lives in Google Drive, and the generation prompt is what produces publishable illustrations.
+Swap these for exports of the actual Drive images when convenient; the rules on this page hold either
+way.

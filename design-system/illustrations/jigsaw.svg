@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="25 14 380 200" role="img" aria-labelledby="tji" style="max-width:100%;height:auto">
+  <title id="tji">Stick figure holding a jigsaw piece beside a box with no picture on it.</title>
+  <rect x="-600" y="-600" width="2400" height="2400" fill="#ffffff"/>
+
+  
+  <!-- head -->
+  <circle cx="80" cy="54" r="20" fill="#fff" stroke="#111111" stroke-width="3.2"/>
+  <!-- baseball cap: crown + peak, white with cross-hatching, never coloured -->
+  <defs>
+    <clipPath id="crown-ji"><path d="M60.5,45 C60,20 100,19.5 99.5,45 Z"/></clipPath>
+  </defs>
+  <path d="M60.5,45 C60,20 100,19.5 99.5,45" fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round"/>
+  <g clip-path="url(#crown-ji)" stroke="#111111" stroke-width="1.5" opacity=".7">
+    <line x1="62" y1="47" x2="82" y2="21"/>
+    <line x1="71" y1="47" x2="91" y2="22"/>
+    <line x1="80" y1="47" x2="99" y2="26"/>
+    <line x1="89" y1="47" x2="101" y2="34"/>
+  </g>
+  <path d="M98.5,45 C110,41 122,44 127,50.5 C118,54.5 105,52.5 98,48.5 Z"
+    fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round"/>
+  <line x1="60.5" y1="45" x2="99.5" y2="45" stroke="#111111" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- face: dot eyes, curved mouth, short angled brows. no nose, no ears -->
+  <circle cx="73" cy="59" r="2.5" fill="#111111"/>
+  <circle cx="87" cy="59" r="2.5" fill="#111111"/>
+  <line x1="68.5" y1="52.5" x2="77" y2="50.5" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="83" y1="50.5" x2="91.5" y2="52.5" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M73,67 Q80,72.5 87,66.5" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- neck, torso, legs -->
+  <g fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round">
+    <line x1="80" y1="74" x2="80" y2="84"/>
+    <path d="M80,84 L80.5,140"/>
+    <path d="M80.5,140 L62,192"/>
+    <path d="M80.5,140 L98.5,191"/>
+    <line x1="62" y1="192" x2="53" y2="192.5"/>
+    <line x1="98.5" y1="191" x2="107" y2="192"/>
+  </g>
+  <path d="M80,96 L60,124" stroke="#111111" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+  <path d="M80,96 L116,94" stroke="#111111" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+  <g transform="translate(118,66) rotate(-8) scale(.72)">
+    <path d="M2,10 h16 a9,9 0 0 1 9,-9 a9,9 0 0 1 9,9 h16 v16 a9,9 0 0 1 9,9 a9,9 0 0 1 -9,9 v16
+      h-50 v-16 a9,9 0 0 0 -9,-9 a9,9 0 0 0 0,-18 a9,9 0 0 0 9,-9 Z"
+      fill="#1A4081" stroke="#111111" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round">
+    <path d="M244,104 L344,104 L360,86 L260,86 Z"/>
+    <path d="M244,104 L244,192 L344,192 L344,104 Z"/>
+    <path d="M344,104 L360,86 L360,174 L344,192 Z"/>
+  </g>
+  <text x="294" y="166" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="66" font-weight="900" fill="#E4623E">?</text>
+  <line x1="30" y1="194" x2="386" y2="194" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+</svg>
