@@ -245,10 +245,9 @@ the illustrations read as a set rather than a pile of clip art.
 
 ### Anatomy
 
-![Anatomy of the stick figure: egg head, baseball cap, T-shirt, mitten hands and shoe-blob feet](./illustrations/anatomy.svg)
+![The character circling Option B with a pencil](./illustrations/choosing-an-option.png)
 
-The plate above is a **construction reference, not finished artwork** — it exists so new illustrations
-can be checked against the rules that actually define him.
+The reference figure. Every rule below is visible in this one drawing.
 
 | Feature | Rule |
 |---------|------|
@@ -269,12 +268,12 @@ can be checked against the rules that actually define him.
 
 | | |
 |---|---|
-| ![Stick figure holding a jigsaw piece beside a box with no picture on it](./illustrations/jigsaw.svg) | ![Stick figure on a ledge looking at three bridges, only one reaching the far side](./illustrations/bridges.svg) |
-| **Marketing without a plan** — a jigsaw with no picture on the box. One prop, one metaphor, nothing else in frame. | **Half-built bridges** — three attempts, one that lands. The finished bridge is the only orange element: the accent marks the answer, not the problem. |
-| ![Stick figure walking past six numbered stage posts rising towards a flag](./illustrations/stages.svg) | ![Stick figure holding a megaphone with sound lines coming out of it](./illustrations/noticed.svg) |
-| **The six stages** — the Perfect Customer Journey as posts rising towards a flag. Numbers alternate orange and navy; the sequence is the message. | **Get Noticed** — stage one on its own. Sound lines navy, megaphone orange, character untouched. |
+| ![The character sitting in an armchair with a mug and a question-mark thought bubble](./illustrations/thinking-it-over.png) | ![The character looking up at a giant envelope with an orange question mark](./illustrations/the-big-unknown.png) |
+| **Thinking it over** — a thought bubble and a brew carry the beat where someone is weighing something up. The mug is the only orange object in frame: one accent, one focal point. | **The big unknown** — scale does the work; the envelope towers over him. The passer-by is the house treatment for secondary figures: smaller, simpler, no cap. |
+| ![The character brushing cobwebs off an old toolbox stacked with dusty books](./illustrations/dusty-toolbox.png) | ![The character kneeling at a brick wall with a spirit level and screwdriver](./illustrations/getting-to-work.png) |
+| **Tools you already have** — cobwebs, dust clouds and hatching build the scene without a single flat grey. Navy on the book spines, orange on the handle, nothing on him. | **Getting to work** — the action pose: kneeling, both hands busy, tools in the two accent colours. Grass tufts and ground scribble place him without building a background. |
 
-Source files live in [`illustrations/`](./illustrations/) as SVG.
+Source files live in [`illustrations/`](./illustrations/).
 
 ### Never
 
@@ -512,8 +511,6 @@ approximated. Section padding, tap-target minimums and the voice rules are docum
 inferred from consistent use across the homepage — worth confirming before treating them as hard
 constraints on a new page type.
 
-The illustrations in section 7 were redrawn against Jamie's actual reference artwork, so the anatomy
-table reflects what the drawings do rather than what the prompt says. They are a **specification
-reference, not the house artwork** — the real set lives in Google Drive, and the generation prompt is
-what produces publishable illustrations. Swap these for exports of the actual images when convenient;
-the rules hold either way.
+The illustrations in section 7 are Jamie's own artwork, supplied directly. The anatomy table describes
+what those drawings actually do, which is not always what the generation prompt says — see the note on
+the prompt's omissions above.

@@ -323,13 +323,21 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
 }
 
 /* ---------- Illustration ---------- */
-.figplate{border:2px solid var(--navy);border-radius:var(--r-2xl);background:var(--white);padding:26px 28px;margin-bottom:26px}
-.figplate svg,.figcard svg{display:block;width:100%;height:auto}
+.plate{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:30px;align-items:start;
+  border:2px solid var(--navy);border-radius:var(--r-2xl);background:var(--white);padding:22px}
+@media (max-width:820px){.plate{grid-template-columns:minmax(0,1fr)}}
+.plate__art{position:relative;line-height:0}
+.plate__art img{width:100%;height:auto;border-radius:var(--r-lg)}
+.plate__art svg{position:absolute;inset:0;width:100%;height:100%}
+.key{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.key li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:11px;align-items:start;font-size:.88rem;line-height:1.45;color:var(--ink-70)}
+.key b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--navy);
+  color:#fff;font-family:var(--font-heading);font-size:.8rem;font-weight:800}
+.key strong{color:var(--navy);font-weight:700}
 .figgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px}
 .figcard{border:2px solid var(--navy);border-radius:var(--r-2xl);background:var(--white);overflow:hidden;display:flex;flex-direction:column}
-.figcard__art{padding:18px 22px 8px;background:var(--white);height:180px;display:grid;place-items:center}
-.figcard__art svg{max-height:100%;max-width:100%}
-.figcard__body{padding:4px 22px 20px;border-top:1px solid var(--line-soft);margin-top:10px;padding-top:14px}
+.figcard img{width:100%;height:auto;display:block;border-bottom:1px solid var(--line-soft)}
+.figcard__body{padding:18px 22px 20px}
 .figcard h4{font-family:var(--font-heading);font-weight:700;font-size:1rem;color:var(--navy);margin:0 0 6px}
 .figcard p{margin:0;font-size:.9rem;line-height:1.55;color:var(--ink-70)}
 .promptbox{
@@ -829,383 +837,59 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
         <p>One recurring character does all the explaining. He is drawn in black ink on white, wears a
           baseball cap in every frame, and never changes proportions between drawings — that
           consistency is what makes the illustrations read as a set rather than a pile of clip art.
-          The plate below is a construction reference, not finished artwork: it exists so new
-          illustrations can be checked against the rules that actually define him.</p>
+          Everything below is the real artwork; the numbered plate is the reference to check new
+          drawings against.</p>
       </div>
 
       <h3 class="sub">Anatomy</h3>
-      <div class="figplate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 8 920 258" role="img" aria-labelledby="tan" style="max-width:100%;height:auto">
-  <title id="tan">Anatomy of the stick figure: egg head, baseball cap, T-shirt, mitten hands and shoe-blob feet.</title>
-  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
-
-  <g stroke="#1A4081" stroke-width="1.6">
-    <line x1="18" y1="34" x2="18" y2="202" stroke-dasharray="4 4"/>
-    <line x1="12" y1="34" x2="24" y2="34"/><line x1="12" y1="82" x2="24" y2="82"/>
-    <line x1="12" y1="130" x2="24" y2="130"/><line x1="12" y1="178" x2="24" y2="178"/>
-    <line x1="12" y1="202" x2="24" y2="202"/>
-  </g>
-  <text x="18" y="221" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="13" font-weight="700" fill="#111111" fill="#1A4081">3.5 heads</text>
-  
-  <!-- head: egg-shaped, white, heavy outline -->
-  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
-  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
-  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <g clip-path="url(#cap-an)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
-    <line x1="95" y1="54" x2="104" y2="44"/>
-  </g>
-  <defs><clipPath id="cap-an"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
-  <!-- brim, sweeping forward-left, hatched underneath -->
-  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <g clip-path="url(#brim-an)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
-    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
-  </g>
-  <defs><clipPath id="brim-an"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
-  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
-  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck -->
-  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <!-- t-shirt with short sleeves -->
-  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
-           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
-           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <path d="M58,104 C52,112 48,120 46,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="45" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(14 45 131)"/>
-  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
-  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
-  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/>
-  <path d="M28,202 C164.0,199.5 164.0,204.5 300,202" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/><g stroke="#111111" stroke-width="2" stroke-linecap="round" fill="none"><path d="M250,202 C247,194 246,193 245,191"/><path d="M253,202 C253,193 253,192 252,189"/><path d="M256,202 C258,195 259,194 261,192"/></g>
-  <!-- accents live on props only -->
-  <rect x="176" y="166" width="52" height="36" rx="3" fill="none" stroke="#111111" stroke-width="3.4"/>
-  <rect x="176" y="166" width="52" height="10" rx="3" fill="#E4623E" stroke="#111111" stroke-width="3.4"/>
-  <g clip-path="url(#clip-an1)" stroke="#111111" stroke-width="1.5" opacity=".85"><line x1="206" y1="200" x2="228" y2="178"/><line x1="212" y1="200" x2="234" y2="178"/><line x1="218" y1="200" x2="240" y2="178"/><line x1="224" y1="200" x2="246" y2="178"/></g><defs><clipPath id="clip-an1"><rect x="206" y="178" width="20" height="22"/></clipPath></defs>
-  <line x1="286" y1="202" x2="286" y2="126" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <path d="M286,128 L322,138 L286,150 Z" fill="#1A4081" stroke="#111111" stroke-width="2.6" stroke-linejoin="round"/>
-  <g stroke="#1A4081" stroke-width="1.4" stroke-dasharray="3 4" fill="none">
-    <path d="M95,33 L150,26 L360,26"/>
-    <path d="M100,44 L150,66 L360,66"/>
-    <path d="M88,62 L150,106 L360,106"/>
-    <path d="M104,104 L150,146 L360,146"/>
-    <path d="M116,133 L150,186 L360,186"/>
-    <path d="M300,150 L330,226 L360,226"/>
-  </g>
-  <g font-family="Gabarito, Trebuchet MS, sans-serif" font-size="13" font-weight="700" fill="#111111">
-    <text x="368" y="30">Egg-shaped head, slightly oversized. White inside, heavy black outline.</text>
-    <text x="368" y="70">Baseball cap, always: domed crown, button, panel seams, hatched brim.</text>
-    <text x="368" y="110">Solid oval eyes, thick angled brows, a small curled nose, curved smile.</text>
-    <text x="368" y="150">A T-shirt with short sleeves — the torso is drawn, not a single line.</text>
-    <text x="368" y="190">Thin limbs ending in solid black mitten hands and shoe blobs.</text>
-    <text x="368" y="230">Accent colours live on props and environment only. Never on him.</text>
-  </g>
-</svg></div>
-      <p class="note">Head height is the unit: he stands about 3.5 heads tall, and every prop is sized
-        against him at realistic human scale — next to a lighthouse, the lighthouse towers over him. He
-        faces left by default; scenes that need him facing right mirror the whole figure. Line weight is
-        heavy and even, with a hand-drawn wobble, and shading is always cross-hatching rather than grey
-        fill.</p>
+      <div class="plate">
+        <div class="plate__art">
+          <img src="illustrations/choosing-an-option.png"
+            alt="The character circling Option B with a pencil, annotated with numbered callouts">
+          <svg viewBox="0 0 1456 1048" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+            <line x1="1250" y1="92" x2="1090" y2="128" stroke="#1b3c7f" stroke-width="3"/><circle cx="1090" cy="128" r="6" fill="#1b3c7f"/><circle cx="1250" cy="92" r="27" fill="#1b3c7f"/><text x="1250" y="101" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">1</text>
+            <line x1="1288" y1="300" x2="1120" y2="322" stroke="#1b3c7f" stroke-width="3"/><circle cx="1120" cy="322" r="6" fill="#1b3c7f"/><circle cx="1288" cy="300" r="27" fill="#1b3c7f"/><text x="1288" y="309" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">2</text>
+            <line x1="726" y1="196" x2="874" y2="258" stroke="#1b3c7f" stroke-width="3"/><circle cx="874" cy="258" r="6" fill="#1b3c7f"/><circle cx="726" cy="196" r="27" fill="#1b3c7f"/><text x="726" y="205" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">3</text>
+            <line x1="1286" y1="556" x2="1082" y2="566" stroke="#1b3c7f" stroke-width="3"/><circle cx="1082" cy="566" r="6" fill="#1b3c7f"/><circle cx="1286" cy="556" r="27" fill="#1b3c7f"/><text x="1286" y="565" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">4</text>
+            <line x1="1300" y1="742" x2="1168" y2="726" stroke="#1b3c7f" stroke-width="3"/><circle cx="1168" cy="726" r="6" fill="#1b3c7f"/><circle cx="1300" cy="742" r="27" fill="#1b3c7f"/><text x="1300" y="751" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">5</text>
+            <line x1="742" y1="986" x2="868" y2="972" stroke="#1b3c7f" stroke-width="3"/><circle cx="868" cy="972" r="6" fill="#1b3c7f"/><circle cx="742" cy="986" r="27" fill="#1b3c7f"/><text x="742" y="995" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">6</text>
+            <line x1="196" y1="486" x2="282" y2="424" stroke="#1b3c7f" stroke-width="3"/><circle cx="282" cy="424" r="6" fill="#1b3c7f"/><circle cx="196" cy="486" r="27" fill="#1b3c7f"/><text x="196" y="495" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">7</text>
+            <line x1="1352" y1="962" x2="1272" y2="918" stroke="#1b3c7f" stroke-width="3"/><circle cx="1272" cy="918" r="6" fill="#1b3c7f"/><circle cx="1352" cy="962" r="27" fill="#1b3c7f"/><text x="1352" y="971" text-anchor="middle" font-family="Gabarito, sans-serif" font-size="26" font-weight="800" fill="#fff">8</text>
+          </svg>
+        </div>
+        <ol class="key">
+          <li><b>1</b><span><strong>Baseball cap, always.</strong> Domed crown, button on top, panel seams, and a hatched brim. White — never coloured.</span></li>
+          <li><b>2</b><span><strong>Egg-shaped head.</strong> Slightly oversized against the body. White inside, heavy black outline.</span></li>
+          <li><b>3</b><span><strong>The face.</strong> Solid oval eyes, thick angled brows, a small curled nose, a curved smile. No ears, no hair.</span></li>
+          <li><b>4</b><span><strong>A T-shirt.</strong> Short sleeves, drawn as a garment. The torso is never a single stick line.</span></li>
+          <li><b>5</b><span><strong>Mitten hands.</strong> Solid black, no fingers. Props are gripped, not balanced.</span></li>
+          <li><b>6</b><span><strong>Shoe blobs.</strong> Solid black ovals, angled slightly outward.</span></li>
+          <li><b>7</b><span><strong>Accents on props only.</strong> Orange and navy mark the thing that matters. They never touch the character.</span></li>
+          <li><b>8</b><span><strong>The JC roundel.</strong> Bottom corner, clear of the artwork.</span></li>
+        </ol>
+      </div>
+      <p class="note">He stands about 3.5 heads tall, and every prop is sized against him at realistic
+        human scale — next to a lighthouse, the lighthouse towers over him. Line weight is heavy and
+        even with a hand-drawn wobble, and shading is always cross-hatching, never a grey fill.</p>
 
       <h3 class="sub">Examples</h3>
       <div class="figgrid">
-      <figure class="figcard">
-        <div class="figcard__art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-152 26 300 195" role="img" aria-labelledby="tji" style="max-width:100%;height:auto">
-  <title id="tji">Stick figure holding a jigsaw piece beside a box with no picture on it.</title>
-  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
-
-  <g fill="#fff" stroke="#111111" stroke-width="4" stroke-linejoin="round">
-    <path d="M-126,110 L-38,110 L-26,92 L-114,92 Z"/>
-    <path d="M-126,110 L-126,200 L-38,200 L-38,110 Z"/>
-    <path d="M-38,110 L-26,92 L-26,182 L-38,200 Z"/>
-  </g>
-  <g clip-path="url(#clip-ji1)" stroke="#111111" stroke-width="1.5" opacity=".85"><line x1="-38" y1="198" x2="48" y2="112"/><line x1="-30" y1="198" x2="56" y2="112"/><line x1="-22" y1="198" x2="64" y2="112"/></g><defs><clipPath id="clip-ji1"><rect x="-38" y="112" width="12" height="86"/></clipPath></defs>
-  <text x="-82" y="170" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="62" font-weight="900" fill="#E4623E">?</text>
-  
-  <!-- head: egg-shaped, white, heavy outline -->
-  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
-  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
-  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <g clip-path="url(#cap-ji)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
-    <line x1="95" y1="54" x2="104" y2="44"/>
-  </g>
-  <defs><clipPath id="cap-ji"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
-  <!-- brim, sweeping forward-left, hatched underneath -->
-  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <g clip-path="url(#brim-ji)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
-    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
-  </g>
-  <defs><clipPath id="brim-ji"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
-  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
-  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck -->
-  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <!-- t-shirt with short sleeves -->
-  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
-           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
-           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <path d="M58,104 C48,108 40,112 34,116" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="30" cy="118" rx="5.5" ry="7" fill="#111111" transform="rotate(52 30 118)"/>
-  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
-  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
-  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/>
-  <g transform="translate(-2,84) rotate(-8) scale(.62)">
-    <path d="M2,10 h16 a9,9 0 0 1 9,-9 a9,9 0 0 1 9,9 h16 v16 a9,9 0 0 1 9,9 a9,9 0 0 1 -9,9 v16
-      h-50 v-16 a9,9 0 0 0 -9,-9 a9,9 0 0 0 0,-18 a9,9 0 0 0 9,-9 Z"
-      fill="#1A4081" stroke="#111111" stroke-width="4.5" stroke-linejoin="round"/>
-  </g>
-  <path d="M-140,202 C-5.0,199.5 -5.0,204.5 130,202" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/><g stroke="#111111" stroke-width="2" stroke-linecap="round" fill="none"><path d="M112,202 C109,194 108,193 107,191"/><path d="M115,202 C115,193 115,192 114,189"/><path d="M118,202 C120,195 121,194 123,192"/></g>
-</svg></div>
-        <figcaption class="figcard__body">
-          <h4>Marketing without a plan</h4>
-          <p>A jigsaw with no picture on the box. The idea carries the point, so the drawing stays literal — one prop, one metaphor, nothing else in frame.</p>
-        </figcaption>
-      </figure>
-      <figure class="figcard">
-        <div class="figcard__art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-345 24 570 250" role="img" aria-labelledby="tbr" style="max-width:100%;height:auto">
-  <title id="tbr">Stick figure on a ledge looking at three bridges. Only one reaches the far side.</title>
-  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
-
-  <path d="M28,196 L190,202 L190,264 L28,264 Z" fill="#fff" stroke="#111111" stroke-width="4"/>
-  <g clip-path="url(#clip-br1)" stroke="#111111" stroke-width="1.5" opacity=".85"><line x1="30" y1="262" x2="86" y2="206"/><line x1="50" y1="262" x2="106" y2="206"/><line x1="70" y1="262" x2="126" y2="206"/><line x1="90" y1="262" x2="146" y2="206"/><line x1="110" y1="262" x2="166" y2="206"/><line x1="130" y1="262" x2="186" y2="206"/><line x1="150" y1="262" x2="206" y2="206"/><line x1="170" y1="262" x2="226" y2="206"/><line x1="190" y1="262" x2="246" y2="206"/></g><defs><clipPath id="clip-br1"><rect x="30" y="206" width="158" height="56"/></clipPath></defs>
-  <path d="M-330,196 L-190,202 L-190,264 L-330,264 Z" fill="#fff" stroke="#111111" stroke-width="4"/>
-  <g clip-path="url(#clip-br2)" stroke="#111111" stroke-width="1.5" opacity=".85"><line x1="-328" y1="262" x2="-272" y2="206"/><line x1="-308" y1="262" x2="-252" y2="206"/><line x1="-288" y1="262" x2="-232" y2="206"/><line x1="-268" y1="262" x2="-212" y2="206"/><line x1="-248" y1="262" x2="-192" y2="206"/><line x1="-228" y1="262" x2="-172" y2="206"/><line x1="-208" y1="262" x2="-152" y2="206"/><line x1="-188" y1="262" x2="-132" y2="206"/></g><defs><clipPath id="clip-br2"><rect x="-328" y="206" width="136" height="56"/></clipPath></defs>
-  <path d="M26,196 C-20,152 -70,142 -96,142" fill="none" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
-  <path d="M-96,142 l-10,-7 l-1,13 l-11,-6" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
-  <path d="M26,200 C-52,186 -120,178 -152,180" fill="none" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
-  <path d="M-152,180 l-11,-6 l-1,13 l-11,-5" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
-  <path d="M28,198 C-58,238 -140,238 -190,198" fill="none" stroke="#E4623E" stroke-width="5.5" stroke-linecap="round"/>
-  <g stroke="#E4623E" stroke-width="3.4" stroke-linecap="round">
-    <line x1="-16" y1="210" x2="-16" y2="224"/><line x1="-62" y1="222" x2="-62" y2="236"/>
-    <line x1="-108" y1="224" x2="-108" y2="238"/><line x1="-152" y1="216" x2="-152" y2="230"/>
-  </g>
-  <g transform="translate(28,0)">
-  <!-- head: egg-shaped, white, heavy outline -->
-  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
-  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
-  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <g clip-path="url(#cap-br)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
-    <line x1="95" y1="54" x2="104" y2="44"/>
-  </g>
-  <defs><clipPath id="cap-br"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
-  <!-- brim, sweeping forward-left, hatched underneath -->
-  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <g clip-path="url(#brim-br)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
-    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
-  </g>
-  <defs><clipPath id="brim-br"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
-  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
-  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck -->
-  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <!-- t-shirt with short sleeves -->
-  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
-           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
-           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <path d="M58,104 C52,112 48,120 46,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="45" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(14 45 131)"/>
-  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
-  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
-  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/></g>
-</svg></div>
-        <figcaption class="figcard__body">
-          <h4>Half-built bridges</h4>
-          <p>Three attempts, one that lands. The finished bridge is the only orange element on the page — the accent marks the answer, not the problem.</p>
-        </figcaption>
-      </figure>
-      <figure class="figcard">
-        <div class="figcard__art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-420 46 580 180" role="img" aria-labelledby="tst" style="max-width:100%;height:auto">
-  <title id="tst">Stick figure walking past six numbered stage posts that rise towards a flag.</title>
-  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
-
-  <path d="M-286,202 C-190,198 -40,180 108,170" fill="none" stroke="#111111" stroke-width="2.6"
-    stroke-dasharray="7 8" stroke-linecap="round" opacity=".55"/>
-  <line x1="-236" y1="202" x2="-236" y2="174" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="-236" cy="154" r="20" fill="#E4623E" stroke="#111111" stroke-width="3"/>
-  <text x="-236" y="161" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="19" font-weight="800" fill="#fff">1</text>
-  <line x1="-176" y1="202" x2="-176" y2="164" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="-176" cy="144" r="20" fill="#1A4081" stroke="#111111" stroke-width="3"/>
-  <text x="-176" y="151" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="19" font-weight="800" fill="#fff">2</text>
-  <line x1="-116" y1="202" x2="-116" y2="154" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="-116" cy="134" r="20" fill="#E4623E" stroke="#111111" stroke-width="3"/>
-  <text x="-116" y="141" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="19" font-weight="800" fill="#fff">3</text>
-  <line x1="-56" y1="202" x2="-56" y2="144" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="-56" cy="124" r="20" fill="#1A4081" stroke="#111111" stroke-width="3"/>
-  <text x="-56" y="131" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="19" font-weight="800" fill="#fff">4</text>
-  <line x1="4" y1="202" x2="4" y2="134" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="4" cy="114" r="20" fill="#E4623E" stroke="#111111" stroke-width="3"/>
-  <text x="4" y="121" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="19" font-weight="800" fill="#fff">5</text>
-  <line x1="64" y1="202" x2="64" y2="124" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="64" cy="104" r="20" fill="#1A4081" stroke="#111111" stroke-width="3"/>
-  <text x="64" y="111" text-anchor="middle" font-family="Gabarito, Trebuchet MS, sans-serif" font-size="19" font-weight="800" fill="#fff">6</text>
-  <line x1="108" y1="172" x2="108" y2="68" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <path d="M108,70 L146,82 L108,94 Z" fill="#E4623E" stroke="#111111" stroke-width="2.6" stroke-linejoin="round"/>
-  <!-- mirrored so he faces the direction of travel -->
-  <g transform="translate(-296,0) scale(-1,1)">
-  <!-- head: egg-shaped, white, heavy outline -->
-  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
-  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
-  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <g clip-path="url(#cap-st)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
-    <line x1="95" y1="54" x2="104" y2="44"/>
-  </g>
-  <defs><clipPath id="cap-st"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
-  <!-- brim, sweeping forward-left, hatched underneath -->
-  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <g clip-path="url(#brim-st)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
-    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
-  </g>
-  <defs><clipPath id="brim-st"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
-  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
-  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck -->
-  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <!-- t-shirt with short sleeves -->
-  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
-           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
-           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <path d="M58,104 C52,112 48,120 46,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="45" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(14 45 131)"/>
-  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
-  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
-  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/></g>
-  <path d="M-390,202 C-120.0,199.5 -120.0,204.5 150,202" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/><g stroke="#111111" stroke-width="2" stroke-linecap="round" fill="none"><path d="M130,202 C127,194 126,193 125,191"/><path d="M133,202 C133,193 133,192 132,189"/><path d="M136,202 C138,195 139,194 141,192"/></g>
-</svg></div>
-        <figcaption class="figcard__body">
-          <h4>The six stages</h4>
-          <p>The Perfect Customer Journey as posts rising towards a flag. Numbers alternate orange and navy; the sequence is the message.</p>
-        </figcaption>
-      </figure>
-      <figure class="figcard">
-        <div class="figcard__art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-140 20 295 200" role="img" aria-labelledby="tno" style="max-width:100%;height:auto">
-  <title id="tno">Stick figure holding a megaphone with sound lines coming out of it.</title>
-  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
-
-  
-  <!-- head: egg-shaped, white, heavy outline -->
-  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
-  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
-  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-  <g clip-path="url(#cap-no)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
-    <line x1="95" y1="54" x2="104" y2="44"/>
-  </g>
-  <defs><clipPath id="cap-no"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
-  <!-- brim, sweeping forward-left, hatched underneath -->
-  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <g clip-path="url(#brim-no)" stroke="#111111" stroke-width="1.5" opacity=".8">
-    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
-    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
-  </g>
-  <defs><clipPath id="brim-no"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
-  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
-  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
-  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck -->
-  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <!-- t-shirt with short sleeves -->
-  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
-           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
-           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
-    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
-  <path d="M58,102 C48,100 40,96 34,92" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="30" cy="90" rx="5.5" ry="7" fill="#111111" transform="rotate(64 30 90)"/>
-  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
-  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
-  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
-  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/>
-  <g transform="translate(26,66) rotate(8) scale(-.62,.62)">
-    <path d="M0,14 L0,34 L20,30 L20,18 Z" fill="#fff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
-    <path d="M20,6 L62,-8 L62,56 L20,42 Z" fill="#E4623E" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
-  </g>
-  <g fill="none" stroke="#1A4081" stroke-width="3.6" stroke-linecap="round">
-    <path d="M-62,74 C-72,83 -72,99 -61,108"/>
-    <path d="M-78,64 C-95,79 -95,105 -78,119"/>
-    <path d="M-94,54 C-117,75 -117,109 -94,129"/>
-  </g>
-  <path d="M-130,202 C0.0,199.5 0.0,204.5 130,202" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/><g stroke="#111111" stroke-width="2" stroke-linecap="round" fill="none"><path d="M100,202 C97,194 96,193 95,191"/><path d="M103,202 C103,193 103,192 102,189"/><path d="M106,202 C108,195 109,194 111,192"/></g>
-</svg></div>
-        <figcaption class="figcard__body">
-          <h4>Get noticed</h4>
-          <p>Stage one, drawn on its own. Sound lines in navy, megaphone in orange, character untouched in black ink.</p>
-        </figcaption>
-      </figure>
+        <figure class="figcard">
+          <img src="illustrations/thinking-it-over.png" alt="The character sitting in an armchair with a mug and a question-mark thought bubble">
+          <figcaption class="figcard__body"><h4>Thinking it over</h4><p>A thought bubble and a brew carry the beat where someone is weighing something up. The mug is the only orange object in frame — one accent, one focal point.</p></figcaption>
+        </figure>
+        <figure class="figcard">
+          <img src="illustrations/the-big-unknown.png" alt="The character looking up at a giant envelope with an orange question mark, another figure walking past">
+          <figcaption class="figcard__body"><h4>The big unknown</h4><p>Scale does the work: the envelope towers over him. The passer-by is the house treatment for secondary figures — smaller, simpler, no cap.</p></figcaption>
+        </figure>
+        <figure class="figcard">
+          <img src="illustrations/dusty-toolbox.png" alt="The character brushing cobwebs off an old toolbox stacked with dusty books">
+          <figcaption class="figcard__body"><h4>Tools you already have</h4><p>Cobwebs, dust clouds and hatching build the scene without a single flat grey. Navy on the book spines, orange on the handle, nothing on him.</p></figcaption>
+        </figure>
+        <figure class="figcard">
+          <img src="illustrations/getting-to-work.png" alt="The character kneeling at a brick wall with a spirit level and screwdriver from an open toolbox">
+          <figcaption class="figcard__body"><h4>Getting to work</h4><p>The action pose: kneeling, both hands busy, tools in the two accent colours. Grass tufts and ground scribble place him without building a background.</p></figcaption>
+        </figure>
       </div>
 
       <h3 class="sub">Rules</h3>
@@ -1213,32 +897,31 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
         <div class="voice__col voice__col--do">
           <h4><i aria-hidden="true">&check;</i> Always</h4>
           <ul>
-            <li>Baseball cap on, every single time: domed crown, button on top, panel seams, and a hatched brim sweeping forward. White, never filled with colour.</li>
-            <li>Egg-shaped head, slightly oversized, white inside with a heavy black outline.</li>
-            <li>Solid oval eyes, thick angled brows, a small curled nose and a curved smile.</li>
-            <li>A T-shirt with short sleeves. The torso is a drawn garment, not a single stick line.</li>
-            <li>Thin limbs ending in solid black mitten hands and shoe blobs.</li>
-            <li>Clean white background, heavy black ink, cross-hatching for shade, and a hand-drawn wobble rather than perfect geometry.</li>
+            <li>Baseball cap on, every single time: domed crown, button, panel seams, hatched brim. White, never coloured.</li>
+            <li>Egg-shaped head, oversized against the body, white inside with a heavy black outline.</li>
+            <li>Oval eyes, thick angled brows, a small curled nose, a curved smile.</li>
+            <li>A T-shirt with short sleeves, mitten hands and shoe blobs — never a bare stick figure.</li>
+            <li>Clean white background, heavy black ink, cross-hatching for shade, a hand-drawn wobble.</li>
             <li>Realistic scale between the character and everything around him.</li>
-            <li>Any other figures in the scene are smaller and simpler: plain oval head, no cap, thinner line.</li>
+            <li>Other figures in the scene are smaller and simpler: plain oval head, no cap, thinner line.</li>
             <li>The JC roundel sits in a bottom corner, clear of the artwork.</li>
           </ul>
         </div>
         <div class="voice__col voice__col--dont">
           <h4><i aria-hidden="true">&times;</i> Never</h4>
           <ul>
-            <li>No colour on the character — not his cap, not his shirt, not another stick figure.</li>
-            <li>No third accent colour. Orange and navy are the only two permitted, on props and environment only.</li>
-            <li>No ears, no hair, no visible mouth interior.</li>
+            <li>No colour on the character — not his cap, not his shirt, not another figure.</li>
+            <li>No third accent colour. Orange and navy only, on props and environment.</li>
+            <li>No ears, no hair.</li>
             <li>No grey fill for shading. Depth comes from hatching.</li>
             <li>No 3D, no photorealism, no clip art. Cartoon line illustration only.</li>
-            <li>No long text in the artwork. Labels are short and bold or they don't go in.</li>
+            <li>No long text in the artwork. Labels are short and bold, or they don't go in.</li>
           </ul>
         </div>
       </div>
 
-      <p class="note">Colour is used sparingly: a mostly black-and-white frame with a few accented
-        objects is the target. If the whole scene is orange, the accent has stopped meaning anything.</p>
+      <p class="note">Colour stays sparing: a mostly black-and-white frame with a few accented objects
+        is the target. If the whole scene is orange, the accent has stopped meaning anything.</p>
 
       <h3 class="sub">Generation prompt</h3>
       <p class="bodycopy" style="max-width:64ch;margin-bottom:16px">New illustrations are generated from
@@ -1289,21 +972,19 @@ If the PCJ, Perfect Customer Journey or stages are mentioned, they are the 6 sta
   4. Convert       5. Deliver &amp; Wow   6. Create Fans</pre>
 
       <div class="flag">
-        <strong>One thing to settle.</strong> The illustration prompt uses
-        <code>#E4623E</code> / <code>#1A4081</code>, while the website ships
-        <code>#E2613D</code> / <code>#1B3C7F</code>. They are a shade apart — close enough to look like
-        a mistake side by side, far enough that an illustration dropped next to a button won't quite
-        match. Pick one pair and use it in both places; the site's values are the safer default, since
-        they're already compiled into the build.
+        <strong>The prompt is missing the things that actually identify him.</strong> Checked against
+        the artwork above, it never mentions the T-shirt, the mitten hands, the shoe-blob feet, the
+        cap's button and panel seams, or the JC roundel — and it says &ldquo;no nose&rdquo; while every
+        reference gives him a small curled one. Those omissions are the likeliest source of drift
+        between generations. Adding them costs five lines and removes most of the guesswork.
       </div>
 
       <div class="flag">
-        <strong>The prompt is missing the things that actually identify him.</strong> Compared against
-        the reference set, it never mentions the T-shirt, the mitten hands, the shoe-blob feet, the cap's
-        button and panel seams, or the JC roundel — and it says &ldquo;no nose&rdquo; while the artwork
-        gives him a small curled one in most frames. Those omissions are the likeliest source of drift
-        between generations. Adding them to the prompt costs five lines and removes most of the
-        guesswork.
+        <strong>One thing to settle.</strong> The prompt uses <code>#E4623E</code> /
+        <code>#1A4081</code>, while the website ships <code>#E2613D</code> / <code>#1B3C7F</code>. A
+        shade apart — close enough to look like a mistake side by side, far enough that an illustration
+        dropped next to a button won't quite match. Pick one pair for both; the site's values are the
+        safer default, since they're already compiled into the build.
       </div>
 
       <h3 class="sub">Other imagery</h3>
@@ -1321,7 +1002,7 @@ If the PCJ, Perfect Customer Journey or stages are mentioned, they are the 6 sta
           <p>The soft orange blur behind a hero, the rotated cream slab behind a portrait: allowed at 5–10% opacity, never behind body text.</p>
         </div></article>
       </div>
-      <p class="note">Alt text describes the idea, not the file: &ldquo;Stick figure looking at three bridges — only one fully built across the gap.&rdquo;</p>
+      <p class="note">Alt text describes the idea, not the file: &ldquo;Stick figure looking up at a giant envelope with a question mark on it.&rdquo;</p>
     </section>
 
     <section class="section" id="voice">
