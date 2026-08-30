@@ -1,13 +1,11 @@
 # Jamie Clarke — Design System
 
-**Version 1.0 · Documented from the live build of [jamieclarke.online](https://jamieclarke.online)**
+**Version 1.0 · The working standard for [jamieclarke.online](https://jamieclarke.online)**
 
-This is the written reference for the brand's visual language. The companion file
-[`design-system.html`](./design-system.html) is the same system rendered as a living style guide —
-open it in a browser to see every component in its real states.
-
-Tokens below were read directly from the site's compiled Tailwind v4 theme, not eyeballed from
-screenshots.
+This is the written reference for the brand's visual language — what to build, in which colours, at
+what size, in whose voice. The companion file [`design-system.html`](./design-system.html) is the same
+system rendered as a living style guide: open it in a browser to see every component in its real
+states.
 
 ---
 
@@ -59,6 +57,12 @@ Secondary text is navy at reduced opacity, never a separate grey — it keeps th
 - `navy/45` — captions, legal microcopy, muted metadata
 - `navy/12` — hairline rules and input borders
 - `navy/5` — background wells
+
+### In illustration
+
+Illustration uses a narrower palette than the interface: **orange and navy only**, on props and
+environment, never on the character. Teal and yellow are interface colours and do not appear in
+artwork.
 
 ### Contrast (WCAG 2.1)
 
@@ -289,64 +293,59 @@ the whole scene is orange, the accent has stopped meaning anything.
 
 ### Generation prompt
 
-New illustrations are generated from the reference set with the prompt below. **Attach the existing
-images every time** — they are the definitive guide, and the prompt only holds if the model can see
-them.
+This is the prompt. Paste it in whole and **attach the reference images every time** — the images are
+the definitive guide, and the wording only holds if the model can see them.
 
 ```text
 VISUAL STYLE INSTRUCTIONS
 
-You generate stick figure illustrations based on prompts I give you. Your only job is to
+You generate stick figure illustrations from the prompts I give you. Your only job is to
 create the image while keeping the character and style 100% consistent with the attached
 reference images.
 
 THE CHARACTER
-Study the attached reference images. This is the definitive guide. Match it exactly every
-time. Key details that must never change:
-  - Round head, slightly oversized relative to body. White/empty inside, black outline.
-  - Baseball cap ALWAYS present. White with black cross-hatching/sketch shading lines.
-    Never coloured.
-  - Simple face: small dot eyes, curved line mouth, short angled eyebrows. No nose, no ears.
-  - Roughly 3.5-4 head-heights tall.
-  - NEVER add any colour to the character. He is black ink on white only.
+Study the attached reference images. They are the definitive guide. Match them exactly
+every time. These details never change:
+  - Egg-shaped head, slightly oversized relative to the body. White inside, heavy black
+    outline.
+  - Baseball cap ALWAYS present: domed crown, a small button on top, curved panel seams,
+    and a brim sweeping forward. White with black cross-hatching for shade. Never coloured.
+  - Face: solid oval eyes, thick angled eyebrows, a small curled nose, a curved smile.
+    No ears, no hair.
+  - A T-shirt with short sleeves. The torso is a drawn garment, never a single stick line.
+  - Thin arms and legs ending in solid black mitten hands (no fingers) and solid black
+    shoe blobs.
+  - Roughly 3.5 head-heights tall.
+  - NEVER add colour to the character. He is black ink on white only.
 
 PROPORTIONS
-The character must always be at realistic human scale relative to the objects and
-environment around him. If he's next to a lighthouse, the lighthouse towers over him. If
-he's at a desk, he's normal desk height. Don't make him oversized relative to the scene.
+Always at realistic human scale relative to the objects and environment around him. Next
+to a lighthouse, the lighthouse towers over him. At a desk, he is normal desk height.
+Never oversized relative to the scene.
 
 COLOURS
-Only two accent colours are ever permitted (plus black and white):
-  #E4623E (warm orange-red)
-  #1A4081 (deep navy blue)
-These go on objects, props, and environmental elements ONLY. Never on the character or
-other stick figures. Use them sparingly - a few coloured accents on a mostly black and
-white image is the goal.
+Only two accent colours are permitted, plus black and white:
+  #E2613D (warm orange-red)
+  #1B3C7F (deep navy blue)
+They go on objects, props and environmental elements ONLY - never on the character, and
+never on any other figure. Use them sparingly: a mostly black-and-white frame with a few
+coloured accents is the goal, with one clear focal point per image.
 
 STYLE
   - Clean white background
   - Black ink pen, hand-drawn feel with slight imperfection
-  - Cartoon/illustration style, not clipart, not 3D, not photorealistic
-  - Other stick figures in the scene should be simpler and smaller than the main character
-  - Keep any text labels short and bold
+  - Cross-hatching for all shading and depth. Never flat grey fill.
+  - Cartoon line illustration. Not clipart, not 3D, not photorealistic.
+  - Any other figures are smaller and simpler: plain oval head, no cap, thinner line.
+  - Keep any text labels short and bold.
+  - Ground him with a light scribble line, grass tufts or a shadow rather than a full
+    background.
 
 THE PERFECT CUSTOMER JOURNEY
-If the PCJ, Perfect Customer Journey or stages are mentioned, they are the 6 stages:
-  1. Get Noticed   2. Connect       3. Engage
+If the PCJ, Perfect Customer Journey or stages are mentioned, they are the six stages:
+  1. Get Noticed   2. Connect        3. Engage
   4. Convert       5. Deliver & Wow  6. Create Fans
 ```
-
-> **The prompt is missing the things that actually identify him.** Checked against the reference set,
-> it never mentions the T-shirt, the mitten hands, the shoe-blob feet, the cap's button and panel
-> seams, or the JC roundel — and it says "no nose" while the artwork gives him a small curled one in
-> most frames. Those omissions are the likeliest source of drift between generations. Adding them
-> costs five lines and removes most of the guesswork.
-
-> **One thing to settle.** The illustration prompt uses `#E4623E` / `#1A4081`, while the website ships
-> `#E2613D` / `#1B3C7F`. They are a shade apart — close enough to look like a mistake side by side,
-> far enough that an illustration dropped next to a button won't quite match. Pick one pair and use it
-> in both places; the site's values are the safer default, since they're already compiled into the
-> build.
 
 ### Other imagery
 
@@ -501,16 +500,20 @@ max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24
 
 ---
 
-## 11. Source
+## 11. Using this document
 
-Captured from the live site on 30 August 2026 via Firecrawl, cross-checked against the compiled
-Tailwind stylesheet (`/_astro/about.*.css`). Stack: Astro 5 + Tailwind CSS v4.
+**Stack.** Astro 5 with Tailwind CSS v4. The `@theme` block in section 10 is the single source of
+truth for colour and type; everything else in this document describes how those tokens are applied.
 
-Colours, fonts, radii, shadow offsets and transition timings are read from the build, not
-approximated. Section padding, tap-target minimums and the voice rules are documented conventions
-inferred from consistent use across the homepage — worth confirming before treating them as hard
-constraints on a new page type.
+**Adding a page.** Start from the section rhythm in section 4 and the components in section 6. If a
+page needs something that isn't here, build it from the existing tokens rather than introducing a new
+colour, radius or shadow.
 
-The illustrations in section 7 are Jamie's own artwork, supplied directly. The anatomy table describes
-what those drawings actually do, which is not always what the generation prompt says — see the note on
-the prompt's omissions above.
+**Adding an illustration.** Use the prompt in section 7 with the reference images attached, then check
+the result against the anatomy table before it ships.
+
+**Changing a token.** Change it in the `@theme` block first, then update section 2, 3 or 4 here to
+match, and bump the version at the top of both files.
+
+**Assets.** The illustration set lives in [`illustrations/`](./illustrations/). Logos, the Perfect
+Customer Journey mark and photography live on the site under `/logos` and `/images`.

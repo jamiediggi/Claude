@@ -346,11 +346,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
   overflow-x:auto;white-space:pre-wrap;margin:0;
 }
 .promptbox b{color:var(--yellow);font-weight:700}
-.flag{
-  border-left:4px solid var(--yellow);background:#fffaf0;border-radius:0 var(--r-xl) var(--r-xl) 0;
-  padding:16px 22px;margin:22px 0 0;font-size:.94rem;line-height:1.6;color:var(--ink-80);
-}
-.flag strong{color:var(--navy)}
 
 /* ---------- Token reference ---------- */
 .codeblock{
@@ -376,7 +371,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
         <span class="wordmark__sub">Design System</span>
       </span>
     </a>
-    <p class="topbar__meta">v1.0 &middot; derived from jamieclarke.online</p>
+    <p class="topbar__meta">Version 1.0 &middot; the working standard</p>
   </div>
 </header>
 
@@ -411,7 +406,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
       <p>The visual language behind jamieclarke.online: a navy-and-orange system built on hard-edged
         borders, offset shadows and plain-English copy. Nothing here is decoration for its own sake —
         every rule exists so a service business can read the page, trust the person, and take one clear
-        next step.</p>
+        next step. Build from these tokens; if something you need isn't here, make it from what is.</p>
       <div class="hero__facts">
         <span class="fact"><span style="background:#1b3c7f"></span>Navy #1B3C7F</span>
         <span class="fact"><span style="background:#e2613d"></span>Orange #E2613D</span>
@@ -513,6 +508,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
       <p class="bodycopy" style="max-width:62ch">Secondary text is navy at reduced opacity rather than a separate grey — it keeps the
         page tonally unified. Use <code>navy/70</code> for body copy on white, <code>navy/45</code> for captions,
         <code>navy/12</code> for hairline rules.</p>
+
+      <h3 class="sub">In illustration</h3>
+      <p class="bodycopy" style="max-width:62ch">Illustration uses a narrower palette than the
+        interface: <strong>orange and navy only</strong>, on props and environment, never on the
+        character. Teal and yellow are interface colours and do not appear in artwork.</p>
 
       <h3 class="sub">Contrast</h3>
       <div class="table-wrap">
@@ -924,68 +924,57 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:
         is the target. If the whole scene is orange, the accent has stopped meaning anything.</p>
 
       <h3 class="sub">Generation prompt</h3>
-      <p class="bodycopy" style="max-width:64ch;margin-bottom:16px">New illustrations are generated from
-        the reference set with the prompt below. Attach the existing images every time — they are the
-        definitive guide, and the prompt only holds if the model can see them.</p>
+      <p class="bodycopy" style="max-width:64ch;margin-bottom:16px">This is the prompt. Paste it in whole
+        and attach the reference images every time — the images are the definitive guide, and the
+        wording only holds if the model can see them.</p>
       <pre class="promptbox"><b>VISUAL STYLE INSTRUCTIONS</b>
 
-You generate stick figure illustrations based on prompts I give you. Your only job is
-to create the image while keeping the character and style 100% consistent with the
-attached reference images.
+You generate stick figure illustrations from the prompts I give you. Your only job is to
+create the image while keeping the character and style 100% consistent with the attached
+reference images.
 
 <b>THE CHARACTER</b>
-Study the attached reference images. This is the definitive guide. Match it exactly
-every time. Key details that must never change:
-  - Round head, slightly oversized relative to body. White/empty inside, black outline.
-  - Baseball cap ALWAYS present. White with black cross-hatching/sketch shading lines.
-    Never coloured.
-  - Simple face: small dot eyes, curved line mouth, short angled eyebrows. No nose,
-    no ears.
-  - Roughly 3.5-4 head-heights tall.
-  - NEVER add any colour to the character. He is black ink on white only.
+Study the attached reference images. They are the definitive guide. Match them exactly
+every time. These details never change:
+  - Egg-shaped head, slightly oversized relative to the body. White inside, heavy black
+    outline.
+  - Baseball cap ALWAYS present: domed crown, a small button on top, curved panel seams,
+    and a brim sweeping forward. White with black cross-hatching for shade. Never coloured.
+  - Face: solid oval eyes, thick angled eyebrows, a small curled nose, a curved smile.
+    No ears, no hair.
+  - A T-shirt with short sleeves. The torso is a drawn garment, never a single stick line.
+  - Thin arms and legs ending in solid black mitten hands (no fingers) and solid black
+    shoe blobs.
+  - Roughly 3.5 head-heights tall.
+  - NEVER add colour to the character. He is black ink on white only.
 
 <b>PROPORTIONS</b>
-The character must always be at realistic human scale relative to the objects and
-environment around him. If he's next to a lighthouse, the lighthouse towers over him.
-If he's at a desk, he's normal desk height. Don't make him oversized relative to the
-scene.
+Always at realistic human scale relative to the objects and environment around him. Next
+to a lighthouse, the lighthouse towers over him. At a desk, he is normal desk height.
+Never oversized relative to the scene.
 
 <b>COLOURS</b>
-Only two accent colours are ever permitted (plus black and white):
-  #E4623E (warm orange-red)
-  #1A4081 (deep navy blue)
-These go on objects, props, and environmental elements ONLY. Never on the character
-or other stick figures. Use them sparingly - a few coloured accents on a mostly black
-and white image is the goal.
+Only two accent colours are permitted, plus black and white:
+  #E2613D (warm orange-red)
+  #1B3C7F (deep navy blue)
+They go on objects, props and environmental elements ONLY - never on the character, and
+never on any other figure. Use them sparingly: a mostly black-and-white frame with a few
+coloured accents is the goal, with one clear focal point per image.
 
 <b>STYLE</b>
   - Clean white background
   - Black ink pen, hand-drawn feel with slight imperfection
-  - Cartoon/illustration style, not clipart, not 3D, not photorealistic
-  - Other stick figures in the scene should be simpler and smaller than the main
-    character
-  - Keep any text labels short and bold
+  - Cross-hatching for all shading and depth. Never flat grey fill.
+  - Cartoon line illustration. Not clipart, not 3D, not photorealistic.
+  - Any other figures are smaller and simpler: plain oval head, no cap, thinner line.
+  - Keep any text labels short and bold.
+  - Ground him with a light scribble line, grass tufts or a shadow rather than a full
+    background.
 
 <b>THE PERFECT CUSTOMER JOURNEY</b>
-If the PCJ, Perfect Customer Journey or stages are mentioned, they are the 6 stages:
-  1. Get Noticed   2. Connect   3. Engage
-  4. Convert       5. Deliver &amp; Wow   6. Create Fans</pre>
-
-      <div class="flag">
-        <strong>The prompt is missing the things that actually identify him.</strong> Checked against
-        the artwork above, it never mentions the T-shirt, the mitten hands, the shoe-blob feet, the
-        cap's button and panel seams, or the JC roundel — and it says &ldquo;no nose&rdquo; while every
-        reference gives him a small curled one. Those omissions are the likeliest source of drift
-        between generations. Adding them costs five lines and removes most of the guesswork.
-      </div>
-
-      <div class="flag">
-        <strong>One thing to settle.</strong> The prompt uses <code>#E4623E</code> /
-        <code>#1A4081</code>, while the website ships <code>#E2613D</code> / <code>#1B3C7F</code>. A
-        shade apart — close enough to look like a mistake side by side, far enough that an illustration
-        dropped next to a button won't quite match. Pick one pair for both; the site's values are the
-        safer default, since they're already compiled into the build.
-      </div>
+If the PCJ, Perfect Customer Journey or stages are mentioned, they are the six stages:
+  1. Get Noticed   2. Connect        3. Engage
+  4. Convert       5. Deliver &amp; Wow  6. Create Fans</pre>
 
       <h3 class="sub">Other imagery</h3>
       <div class="card-grid">
@@ -1132,7 +1121,7 @@ max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24</div>
 </div>
 
 <footer class="pagefoot">
-  Jamie Clarke Design System · v1.0 · documented from the live build of jamieclarke.online
+  Jamie Clarke Design System · Version 1.0 · the working standard for jamieclarke.online
 </footer>
 
 </body>
