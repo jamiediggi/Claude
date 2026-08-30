@@ -1,49 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="25 14 240 195" role="img" aria-labelledby="tno" style="max-width:100%;height:auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-140 20 295 200" role="img" aria-labelledby="tno" style="max-width:100%;height:auto">
   <title id="tno">Stick figure holding a megaphone with sound lines coming out of it.</title>
-  <rect x="-600" y="-600" width="2400" height="2400" fill="#ffffff"/>
+  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
 
   
-  <!-- head -->
-  <circle cx="80" cy="54" r="20" fill="#fff" stroke="#111111" stroke-width="3.2"/>
-  <!-- baseball cap: crown + peak, white with cross-hatching, never coloured -->
-  <defs>
-    <clipPath id="crown-no"><path d="M60.5,45 C60,20 100,19.5 99.5,45 Z"/></clipPath>
-  </defs>
-  <path d="M60.5,45 C60,20 100,19.5 99.5,45" fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round"/>
-  <g clip-path="url(#crown-no)" stroke="#111111" stroke-width="1.5" opacity=".7">
-    <line x1="62" y1="47" x2="82" y2="21"/>
-    <line x1="71" y1="47" x2="91" y2="22"/>
-    <line x1="80" y1="47" x2="99" y2="26"/>
-    <line x1="89" y1="47" x2="101" y2="34"/>
+  <!-- head: egg-shaped, white, heavy outline -->
+  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
+  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
+  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
+  <g clip-path="url(#cap-no)" stroke="#111111" stroke-width="1.5" opacity=".8">
+    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
+    <line x1="95" y1="54" x2="104" y2="44"/>
   </g>
-  <path d="M98.5,45 C110,41 122,44 127,50.5 C118,54.5 105,52.5 98,48.5 Z"
-    fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round"/>
-  <line x1="60.5" y1="45" x2="99.5" y2="45" stroke="#111111" stroke-width="3.2" stroke-linecap="round"/>
-  <!-- face: dot eyes, curved mouth, short angled brows. no nose, no ears -->
-  <circle cx="73" cy="59" r="2.5" fill="#111111"/>
-  <circle cx="87" cy="59" r="2.5" fill="#111111"/>
-  <line x1="68.5" y1="52.5" x2="77" y2="50.5" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
-  <line x1="83" y1="50.5" x2="91.5" y2="52.5" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M73,67 Q80,72.5 87,66.5" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck, torso, legs -->
-  <g fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round">
-    <line x1="80" y1="74" x2="80" y2="84"/>
-    <path d="M80,84 L80.5,140"/>
-    <path d="M80.5,140 L62,192"/>
-    <path d="M80.5,140 L98.5,191"/>
-    <line x1="62" y1="192" x2="53" y2="192.5"/>
-    <line x1="98.5" y1="191" x2="107" y2="192"/>
+  <defs><clipPath id="cap-no"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
+  <!-- brim, sweeping forward-left, hatched underneath -->
+  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <g clip-path="url(#brim-no)" stroke="#111111" stroke-width="1.5" opacity=".8">
+    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
+    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
   </g>
-  <path d="M80,96 L58,124" stroke="#111111" stroke-width="3.4" stroke-linecap="round" fill="none"/>
-  <path d="M80,96 L112,88" stroke="#111111" stroke-width="3.4" stroke-linecap="round" fill="none"/>
-  <g transform="translate(108,62) rotate(-14) scale(.62)">
-    <path d="M0,14 L0,34 L20,30 L20,18 Z" fill="#fff" stroke="#111111" stroke-width="3.6" stroke-linejoin="round"/>
-    <path d="M20,6 L62,-8 L62,56 L20,42 Z" fill="#E4623E" stroke="#111111" stroke-width="3.6" stroke-linejoin="round"/>
+  <defs><clipPath id="brim-no"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
+  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
+  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
+  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
+  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- neck -->
+  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <!-- t-shirt with short sleeves -->
+  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
+           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
+           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <path d="M58,102 C48,100 40,96 34,92" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="30" cy="90" rx="5.5" ry="7" fill="#111111" transform="rotate(64 30 90)"/>
+  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
+  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
+  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/>
+  <g transform="translate(26,66) rotate(8) scale(-.62,.62)">
+    <path d="M0,14 L0,34 L20,30 L20,18 Z" fill="#fff" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M20,6 L62,-8 L62,56 L20,42 Z" fill="#E4623E" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
   </g>
-  <g fill="none" stroke="#1A4081" stroke-width="3.4" stroke-linecap="round">
-    <path d="M158,66 C168,75 168,91 157,100"/>
-    <path d="M173,56 C190,71 190,97 173,111"/>
-    <path d="M188,46 C211,67 211,101 188,121"/>
+  <g fill="none" stroke="#1A4081" stroke-width="3.6" stroke-linecap="round">
+    <path d="M-62,74 C-72,83 -72,99 -61,108"/>
+    <path d="M-78,64 C-95,79 -95,105 -78,119"/>
+    <path d="M-94,54 C-117,75 -117,109 -94,129"/>
   </g>
-  <line x1="20" y1="194" x2="240" y2="194" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+  <path d="M-130,202 C0.0,199.5 0.0,204.5 130,202" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/><g stroke="#111111" stroke-width="2" stroke-linecap="round" fill="none"><path d="M100,202 C97,194 96,193 95,191"/><path d="M103,202 C103,193 103,192 102,189"/><path d="M106,202 C108,195 109,194 111,192"/></g>
 </svg>

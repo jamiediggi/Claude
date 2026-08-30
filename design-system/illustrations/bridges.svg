@@ -1,63 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 16 700 250" role="img" aria-labelledby="tbr" style="max-width:100%;height:auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-345 24 570 250" role="img" aria-labelledby="tbr" style="max-width:100%;height:auto">
   <title id="tbr">Stick figure on a ledge looking at three bridges. Only one reaches the far side.</title>
-  <rect x="-600" y="-600" width="2400" height="2400" fill="#ffffff"/>
+  <rect x="-800" y="-800" width="3000" height="3000" fill="#ffffff"/>
 
-  <path d="M-30,194 L150,194 L150,252 L-30,252 Z" fill="#fff" stroke="#111111" stroke-width="3.2"/>
-  <g stroke="#111111" stroke-width="1.4" opacity=".5">
-    <line x1="-20" y1="252" x2="10" y2="200"/><line x1="10" y1="252" x2="40" y2="200"/>
-    <line x1="40" y1="252" x2="70" y2="200"/><line x1="70" y1="252" x2="100" y2="200"/>
-    <line x1="100" y1="252" x2="130" y2="200"/>
+  <path d="M28,196 L190,202 L190,264 L28,264 Z" fill="#fff" stroke="#111111" stroke-width="4"/>
+  <g clip-path="url(#clip-br1)" stroke="#111111" stroke-width="1.5" opacity=".85"><line x1="30" y1="262" x2="86" y2="206"/><line x1="50" y1="262" x2="106" y2="206"/><line x1="70" y1="262" x2="126" y2="206"/><line x1="90" y1="262" x2="146" y2="206"/><line x1="110" y1="262" x2="166" y2="206"/><line x1="130" y1="262" x2="186" y2="206"/><line x1="150" y1="262" x2="206" y2="206"/><line x1="170" y1="262" x2="226" y2="206"/><line x1="190" y1="262" x2="246" y2="206"/></g><defs><clipPath id="clip-br1"><rect x="30" y="206" width="158" height="56"/></clipPath></defs>
+  <path d="M-330,196 L-190,202 L-190,264 L-330,264 Z" fill="#fff" stroke="#111111" stroke-width="4"/>
+  <g clip-path="url(#clip-br2)" stroke="#111111" stroke-width="1.5" opacity=".85"><line x1="-328" y1="262" x2="-272" y2="206"/><line x1="-308" y1="262" x2="-252" y2="206"/><line x1="-288" y1="262" x2="-232" y2="206"/><line x1="-268" y1="262" x2="-212" y2="206"/><line x1="-248" y1="262" x2="-192" y2="206"/><line x1="-228" y1="262" x2="-172" y2="206"/><line x1="-208" y1="262" x2="-152" y2="206"/><line x1="-188" y1="262" x2="-132" y2="206"/></g><defs><clipPath id="clip-br2"><rect x="-328" y="206" width="136" height="56"/></clipPath></defs>
+  <path d="M26,196 C-20,152 -70,142 -96,142" fill="none" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-96,142 l-10,-7 l-1,13 l-11,-6" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+  <path d="M26,200 C-52,186 -120,178 -152,180" fill="none" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-152,180 l-11,-6 l-1,13 l-11,-5" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+  <path d="M28,198 C-58,238 -140,238 -190,198" fill="none" stroke="#E4623E" stroke-width="5.5" stroke-linecap="round"/>
+  <g stroke="#E4623E" stroke-width="3.4" stroke-linecap="round">
+    <line x1="-16" y1="210" x2="-16" y2="224"/><line x1="-62" y1="222" x2="-62" y2="236"/>
+    <line x1="-108" y1="224" x2="-108" y2="238"/><line x1="-152" y1="216" x2="-152" y2="230"/>
   </g>
-  <path d="M470,194 L620,194 L620,252 L470,252 Z" fill="#fff" stroke="#111111" stroke-width="3.2"/>
-  <g stroke="#111111" stroke-width="1.4" opacity=".5">
-    <line x1="480" y1="252" x2="510" y2="200"/><line x1="510" y1="252" x2="540" y2="200"/>
-    <line x1="540" y1="252" x2="570" y2="200"/><line x1="570" y1="252" x2="600" y2="200"/>
+  <g transform="translate(28,0)">
+  <!-- head: egg-shaped, white, heavy outline -->
+  <path d="M80,34 C95,34 103,46 103,59 C103,73 94,82 80,82 C66,82 58,73 58,59 C58,46 65,34 80,34 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <!-- baseball cap: crown, button, panel seams, brim. white, never coloured -->
+  <path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <circle cx="81" cy="30.5" r="2.6" fill="#fff" stroke="#111111" stroke-width="2.4"/>
+  <path d="M81,33 C75,39 69,46 65,50" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M81,33 C88,38 95,45 99,51" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
+  <g clip-path="url(#cap-br)" stroke="#111111" stroke-width="1.5" opacity=".8">
+    <line x1="84" y1="52" x2="99" y2="34"/><line x1="90" y1="53" x2="103" y2="38"/>
+    <line x1="95" y1="54" x2="104" y2="44"/>
   </g>
-  <!-- two attempts that stop in mid-air -->
-  <path d="M152,188 C196,150 240,142 262,142" fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <path d="M262,142 l9,-7 l1,13 l10,-6" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M152,192 C226,180 296,176 330,178" fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round"/>
-  <path d="M330,178 l10,-6 l1,13 l10,-5" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- the one that lands -->
-  <path d="M150,190 C240,230 380,230 470,190" fill="none" stroke="#E4623E" stroke-width="5" stroke-linecap="round"/>
-  <g stroke="#E4623E" stroke-width="3" stroke-linecap="round">
-    <line x1="196" y1="206" x2="196" y2="219"/><line x1="248" y1="218" x2="248" y2="231"/>
-    <line x1="310" y1="222" x2="310" y2="235"/><line x1="372" y1="218" x2="372" y2="231"/>
-    <line x1="424" y1="206" x2="424" y2="219"/>
+  <defs><clipPath id="cap-br"><path d="M59,52 C60,32 100,29 102,54 C90,46 71,46 59,52 Z"/></clipPath></defs>
+  <!-- brim, sweeping forward-left, hatched underneath -->
+  <path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <g clip-path="url(#brim-br)" stroke="#111111" stroke-width="1.5" opacity=".8">
+    <line x1="28" y1="64" x2="40" y2="50"/><line x1="35" y1="65" x2="47" y2="51"/>
+    <line x1="42" y1="65" x2="54" y2="51"/><line x1="49" y1="64" x2="60" y2="53"/>
   </g>
-  <g transform="translate(-32,0)">
-  <!-- head -->
-  <circle cx="80" cy="54" r="20" fill="#fff" stroke="#111111" stroke-width="3.2"/>
-  <!-- baseball cap: crown + peak, white with cross-hatching, never coloured -->
-  <defs>
-    <clipPath id="crown-br"><path d="M60.5,45 C60,20 100,19.5 99.5,45 Z"/></clipPath>
-  </defs>
-  <path d="M60.5,45 C60,20 100,19.5 99.5,45" fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round"/>
-  <g clip-path="url(#crown-br)" stroke="#111111" stroke-width="1.5" opacity=".7">
-    <line x1="62" y1="47" x2="82" y2="21"/>
-    <line x1="71" y1="47" x2="91" y2="22"/>
-    <line x1="80" y1="47" x2="99" y2="26"/>
-    <line x1="89" y1="47" x2="101" y2="34"/>
-  </g>
-  <path d="M98.5,45 C110,41 122,44 127,50.5 C118,54.5 105,52.5 98,48.5 Z"
-    fill="#fff" stroke="#111111" stroke-width="3.2" stroke-linejoin="round"/>
-  <line x1="60.5" y1="45" x2="99.5" y2="45" stroke="#111111" stroke-width="3.2" stroke-linecap="round"/>
-  <!-- face: dot eyes, curved mouth, short angled brows. no nose, no ears -->
-  <circle cx="73" cy="59" r="2.5" fill="#111111"/>
-  <circle cx="87" cy="59" r="2.5" fill="#111111"/>
-  <line x1="68.5" y1="52.5" x2="77" y2="50.5" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
-  <line x1="83" y1="50.5" x2="91.5" y2="52.5" stroke="#111111" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M73,67 Q80,72.5 87,66.5" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
-  <!-- neck, torso, legs -->
-  <g fill="none" stroke="#111111" stroke-width="3.4" stroke-linecap="round">
-    <line x1="80" y1="74" x2="80" y2="84"/>
-    <path d="M80,84 L80.5,140"/>
-    <path d="M80.5,140 L62,192"/>
-    <path d="M80.5,140 L98.5,191"/>
-    <line x1="62" y1="192" x2="53" y2="192.5"/>
-    <line x1="98.5" y1="191" x2="107" y2="192"/>
-  </g>
-  <path d="M80,96 L58,124" stroke="#111111" stroke-width="3.4" stroke-linecap="round" fill="none"/>
-  <path d="M80,96 L116,90" stroke="#111111" stroke-width="3.4" stroke-linecap="round" fill="none"/>
-  </g>
+  <defs><clipPath id="brim-br"><path d="M63,47 C48,45 29,51 25,59 C31,66 50,63 64,54 Z"/></clipPath></defs>
+  <!-- face: oval eyes, thick angled brows, small curled nose, curved smile -->
+  <ellipse cx="70" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
+  <ellipse cx="85" cy="61" rx="3.1" ry="4.4" fill="#111111"/>
+  <path d="M64.5,54 C67,51.5 71,51.5 73.5,53.5" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M81,53.5 C83.5,51.5 87.5,51.5 90,54" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M77,66 C74,69 75,72 78,71.5" fill="none" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M70,75 C75,80 83,79 87,74" fill="none" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- neck -->
+  <line x1="80" y1="82" x2="80" y2="89" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <!-- t-shirt with short sleeves -->
+  <path d="M80,89 C72,89 66,91 62,95 C59,98 57,102 56,105 C59,107 63,107 66,105
+           C65,114 65,121 64,127 C72,129 88,129 96,127 C95,121 95,114 94,105
+           C97,107 101,107 104,105 C103,102 101,98 98,95 C94,91 88,89 80,89 Z"
+    fill="#fff" stroke="#111111" stroke-width="4.2" stroke-linejoin="round"/>
+  <path d="M58,104 C52,112 48,120 46,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="45" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(14 45 131)"/>
+  <path d="M102,104 C108,112 112,120 114,127" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="115" cy="131" rx="5.5" ry="7" fill="#111111" transform="rotate(-14 115 131)"/>
+  <path d="M73,126 C71,152 70,178 70,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <path d="M89,126 C91,152 92,178 92,192" fill="none" stroke="#111111" stroke-width="3.8" stroke-linecap="round"/>
+  <ellipse cx="64" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(-6 64 196)"/>
+  <ellipse cx="98" cy="196" rx="10" ry="5.5" fill="#111111" transform="rotate(6 98 196)"/></g>
 </svg>

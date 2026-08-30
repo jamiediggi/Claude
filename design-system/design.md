@@ -245,17 +245,25 @@ the illustrations read as a set rather than a pile of clip art.
 
 ### Anatomy
 
-![Anatomy of the stick figure: round head, baseball cap, four head-heights tall, black ink only](./illustrations/anatomy.svg)
+![Anatomy of the stick figure: egg head, baseball cap, T-shirt, mitten hands and shoe-blob feet](./illustrations/anatomy.svg)
+
+The plate above is a **construction reference, not finished artwork** — it exists so new illustrations
+can be checked against the rules that actually define him.
 
 | Feature | Rule |
 |---------|------|
-| Head | Round, slightly oversized relative to the body. White/empty inside, black outline. |
-| Cap | Baseball cap **always** present. White with black cross-hatching. Never coloured. |
-| Face | Small dot eyes, curved line mouth, short angled eyebrows. No nose, no ears. |
-| Height | Roughly 3.5–4 head-heights tall. Head diameter is the unit for everything else. |
+| Head | Egg-shaped, slightly oversized relative to the body. White inside, heavy black outline. |
+| Cap | Baseball cap **always** present: domed crown, button on top, panel seams, hatched brim sweeping forward. White, never coloured. |
+| Face | Solid oval eyes, thick angled brows, a small curled nose, a curved smile. No ears, no hair. |
+| Torso | A **T-shirt with short sleeves** — a drawn garment, not a single stick line. |
+| Hands & feet | Thin limbs ending in **solid black mitten hands** and **solid black shoe blobs**. |
+| Height | About 3.5 head-heights. Head height is the unit for everything else in the frame. |
+| Facing | Faces **left** by default. Scenes needing him to face right mirror the whole figure. |
+| Line & shade | Heavy, even line weight with a hand-drawn wobble. Shading is cross-hatching, never grey fill. |
 | Colour | Black ink on white only. The character is never coloured, and neither is any other figure. |
 | Scale | Realistic human scale against the scene. Next to a lighthouse, the lighthouse towers over him. |
-| Extras | Other stick figures in a scene are smaller and simpler than the main character. |
+| Extras | Other figures are smaller and simpler: plain oval head, no cap, thinner line. |
+| Logo | The JC roundel sits in a bottom corner, clear of the artwork. |
 
 ### Examples
 
@@ -270,9 +278,10 @@ Source files live in [`illustrations/`](./illustrations/) as SVG.
 
 ### Never
 
-- No colour on the character — not his cap, not his clothes, not another stick figure.
+- No colour on the character — not his cap, not his shirt, not another stick figure.
 - No third accent colour. Orange and navy only, on props and environment.
-- No nose, no ears, no hair.
+- No ears, no hair.
+- No grey fill for shading. Depth comes from hatching.
 - No 3D, no photorealism, no clip art. Cartoon line illustration only.
 - No long text in the artwork. Labels are short and bold, or they don't go in.
 
@@ -327,6 +336,12 @@ If the PCJ, Perfect Customer Journey or stages are mentioned, they are the 6 sta
   1. Get Noticed   2. Connect       3. Engage
   4. Convert       5. Deliver & Wow  6. Create Fans
 ```
+
+> **The prompt is missing the things that actually identify him.** Checked against the reference set,
+> it never mentions the T-shirt, the mitten hands, the shoe-blob feet, the cap's button and panel
+> seams, or the JC roundel — and it says "no nose" while the artwork gives him a small curled one in
+> most frames. Those omissions are the likeliest source of drift between generations. Adding them
+> costs five lines and removes most of the guesswork.
 
 > **One thing to settle.** The illustration prompt uses `#E4623E` / `#1A4081`, while the website ships
 > `#E2613D` / `#1B3C7F`. They are a shade apart — close enough to look like a mistake side by side,
@@ -497,9 +512,8 @@ approximated. Section padding, tap-target minimums and the voice rules are docum
 inferred from consistent use across the homepage — worth confirming before treating them as hard
 constraints on a new page type.
 
-The illustrations in section 7 were drawn to the written character spec (round head, cross-hatched
-cap, four head-heights, ink-only figure, accents on props) so the constraints are visible rather than
-just described. They are a **specification reference, not the house artwork** — the real reference
-set lives in Google Drive, and the generation prompt is what produces publishable illustrations.
-Swap these for exports of the actual Drive images when convenient; the rules on this page hold either
-way.
+The illustrations in section 7 were redrawn against Jamie's actual reference artwork, so the anatomy
+table reflects what the drawings do rather than what the prompt says. They are a **specification
+reference, not the house artwork** — the real set lives in Google Drive, and the generation prompt is
+what produces publishable illustrations. Swap these for exports of the actual images when convenient;
+the rules hold either way.
