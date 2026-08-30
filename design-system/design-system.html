@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jamie Clarke Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700;800;900&family=Maven+Pro:wght@400;500;600;700&display=swap">
+<style>
+/* ============================================================
+   Jamie Clarke — Design System
+   Single-theme by design: this page IS the brand, so it renders
+   in brand colours on every host. Every colour is painted.
+   ============================================================ */
+
+:root{
+  /* Core brand */
+  --navy:#1b3c7f;
+  --orange:#e2613d;
+  --cream:#fbf5ea;
+  --teal:#43bccd;
+  --yellow:#f9c80e;
+  --white:#ffffff;
+
+  /* Navy-tinted neutrals (never a pure grey) */
+  --ink:var(--navy);
+  --ink-80:rgba(27,60,127,.80);
+  --ink-70:rgba(27,60,127,.70);
+  --ink-45:rgba(27,60,127,.45);
+  --line:rgba(27,60,127,.12);
+  --line-soft:rgba(27,60,127,.07);
+  --mist:#f6f7fb;
+
+  /* Type */
+  --font-heading:"Gabarito","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Maven Pro","Segoe UI",system-ui,sans-serif;
+
+  /* Radius */
+  --r-lg:.5rem; --r-xl:.75rem; --r-2xl:1rem; --r-3xl:1.5rem; --r-full:9999px;
+
+  /* Chunky elevation */
+  --chunk-btn:4px 4px 0 var(--navy);
+  --chunk-btn-hover:7px 7px 0 var(--navy);
+  --chunk-btn-active:1px 1px 0 var(--navy);
+  --chunk-card:5px 5px 0 var(--navy);
+  --chunk-card-hover:8px 8px 0 var(--navy);
+
+  --shell:1180px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+a{color:var(--navy)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+
+/* ---------- Page chrome ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.topbar__inner{
+  max-width:var(--shell);margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.wordmark{display:flex;align-items:center;gap:12px;text-decoration:none}
+.wordmark__mark{
+  width:38px;height:38px;flex:none;border-radius:11px;
+  border:2px solid var(--navy);background:var(--orange);
+  box-shadow:3px 3px 0 var(--navy);
+  display:grid;place-items:center;
+  font-family:var(--font-heading);font-weight:900;font-size:15px;color:var(--white);
+  letter-spacing:.02em;
+}
+.wordmark__text{font-family:var(--font-heading);font-weight:800;font-size:1.05rem;color:var(--navy);line-height:1.1}
+.wordmark__sub{display:block;font-family:var(--font-body);font-weight:500;font-size:.72rem;color:var(--ink-45);letter-spacing:.06em;text-transform:uppercase}
+.topbar__meta{font-size:.8rem;color:var(--ink-45);font-weight:500;text-align:right}
+
+.shell{max-width:var(--shell);margin:0 auto;padding:0 24px 96px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:56px}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0;padding-bottom:64px}
+}
+
+/* ---------- Side index ---------- */
+.index{position:sticky;top:96px;align-self:start;padding-top:56px}
+.index__label{font-family:var(--font-heading);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-45);margin:0 0 14px}
+.index__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.index__list a{
+  display:block;padding:6px 10px;border-radius:8px;text-decoration:none;
+  font-size:.88rem;font-weight:500;color:var(--ink-70);border-left:2px solid transparent;
+  transition:background .15s,color .15s;
+}
+.index__list a:hover{background:var(--mist);color:var(--navy);border-left-color:var(--orange)}
+@media (max-width:900px){
+  .index{position:static;padding:20px 0 0}
+  .index__list{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:8px}
+  .index__list a{white-space:nowrap;border:1px solid var(--line);border-left:1px solid var(--line)}
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  display:inline-block;font-family:var(--font-heading);font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--orange);margin:0 0 14px;
+}
+.hero h1{
+  font-family:var(--font-heading);font-weight:800;color:var(--navy);
+  font-size:clamp(2.25rem,5.5vw,3.5rem);line-height:1.12;letter-spacing:-.015em;
+  margin:0 0 18px;text-wrap:balance;max-width:16ch;
+}
+.hero p{font-size:1.125rem;line-height:1.7;color:var(--ink-70);margin:0 0 28px;max-width:60ch}
+.hero__facts{display:flex;flex-wrap:wrap;gap:10px}
+.fact{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:var(--r-full);
+  border:2px solid var(--navy);background:var(--white);font-size:.82rem;font-weight:600;color:var(--navy);
+}
+.fact span{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--navy);flex:none}
+
+/* ---------- Section rhythm ---------- */
+.section{padding:56px 0;border-bottom:1px solid var(--line)}
+.section:last-of-type{border-bottom:0}
+.section__head{margin-bottom:32px;max-width:62ch}
+.section__head h2{
+  font-family:var(--font-heading);font-weight:800;color:var(--navy);
+  font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;margin:0 0 10px;letter-spacing:-.01em;text-wrap:balance;
+}
+.section__head p{margin:0;color:var(--ink-70);font-size:1.02rem}
+h3.sub{font-family:var(--font-heading);font-weight:700;font-size:1.12rem;color:var(--navy);margin:36px 0 14px}
+h3.sub:first-of-type{margin-top:0}
+.note{font-size:.88rem;color:var(--ink-45);margin:10px 0 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;background:var(--mist);border:1px solid var(--line-soft);border-radius:5px;padding:1px 5px;color:var(--navy)}
+
+/* ---------- Colour ---------- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.swatch{border:2px solid var(--navy);border-radius:var(--r-2xl);overflow:hidden;background:var(--white)}
+.swatch__chip{height:104px;display:flex;align-items:flex-end;padding:12px;font-family:var(--font-heading);font-weight:700;font-size:.8rem}
+.swatch__body{padding:14px 16px 16px;border-top:2px solid var(--navy)}
+.swatch__name{font-family:var(--font-heading);font-weight:700;color:var(--navy);font-size:.98rem;margin:0}
+.swatch__hex{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;color:var(--ink-45);letter-spacing:.02em;margin:2px 0 8px;font-variant-numeric:tabular-nums}
+.swatch__use{margin:0;font-size:.86rem;line-height:1.5;color:var(--ink-70)}
+
+.ratios{width:100%;border-collapse:collapse;margin-top:8px;font-size:.9rem}
+.ratios th,.ratios td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+.ratios th{font-family:var(--font-heading);font-weight:700;color:var(--navy);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+.ratios td:nth-child(2){font-variant-numeric:tabular-nums;font-weight:600}
+.pass{color:#1d7a4c;font-weight:700}
+.warn{color:#b4501f;font-weight:700}
+.table-wrap{overflow-x:auto}
+
+/* ---------- Type specimens ---------- */
+.specimen{border:2px solid var(--navy);border-radius:var(--r-2xl);padding:24px;background:var(--white);display:grid;gap:18px}
+.spec-row{display:grid;grid-template-columns:132px minmax(0,1fr);gap:20px;align-items:baseline;padding-bottom:16px;border-bottom:1px dashed var(--line)}
+.spec-row:last-child{border-bottom:0;padding-bottom:0}
+.spec-row__meta{font-size:.76rem;color:var(--ink-45);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.5}
+.d1{font-family:var(--font-heading);font-weight:800;font-size:clamp(2rem,4.4vw,3.5rem);line-height:1.15;color:var(--navy);letter-spacing:-.015em;margin:0}
+.d2{font-family:var(--font-heading);font-weight:800;font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.2;color:var(--navy);margin:0}
+.d3{font-family:var(--font-heading);font-weight:700;font-size:1.25rem;line-height:1.4;color:var(--navy);margin:0}
+.lead{font-size:1.125rem;line-height:1.7;color:var(--ink-70);margin:0}
+.bodycopy{font-size:1rem;line-height:1.6;color:var(--ink-70);margin:0}
+.small{font-size:.875rem;line-height:1.55;color:var(--ink-45);margin:0}
+.label-ex{font-family:var(--font-heading);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:var(--orange);margin:0}
+@media (max-width:640px){.spec-row{grid-template-columns:1fr;gap:6px}}
+
+/* ---------- Scale / spacing ---------- */
+.scale{display:grid;gap:8px}
+.scale__row{display:grid;grid-template-columns:64px 84px minmax(0,1fr);gap:14px;align-items:center;font-size:.86rem}
+.scale__bar{height:16px;background:var(--orange);border:1.5px solid var(--navy);border-radius:3px}
+.scale__key{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--navy);font-weight:600}
+.scale__val{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-45);font-variant-numeric:tabular-nums}
+
+.radii{display:flex;flex-wrap:wrap;gap:18px}
+.radius-demo{width:112px;text-align:center}
+.radius-demo div{height:74px;border:2px solid var(--navy);background:var(--cream);margin-bottom:8px}
+.radius-demo p{margin:0;font-size:.78rem;color:var(--ink-45);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ---------- Demo canvas ---------- */
+.demo{
+  border:1px solid var(--line);border-radius:var(--r-2xl);
+  background:var(--mist);padding:32px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;
+}
+.demo--cream{background:var(--cream)}
+.demo--navy{background:var(--navy)}
+.demo--stack{flex-direction:column;align-items:stretch}
+.demo__caption{width:100%;font-size:.78rem;color:var(--ink-45);margin:0 0 -4px;font-weight:500}
+.demo--navy .demo__caption{color:rgba(255,255,255,.55)}
+
+/* ---------- Buttons (the chunky system) ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-heading);font-weight:700;font-size:1rem;line-height:1;
+  padding:14px 24px;border-radius:var(--r-xl);text-decoration:none;cursor:pointer;
+  border:2px solid var(--navy);box-shadow:var(--chunk-btn);
+  transition:transform .18s,box-shadow .18s;
+}
+.btn:hover{box-shadow:var(--chunk-btn-hover);transform:translate(-2px,-2px)}
+.btn:active{box-shadow:var(--chunk-btn-active);transform:translate(2px,2px)}
+.btn--primary{background:var(--orange);color:var(--white)}
+.btn--secondary{background:var(--white);color:var(--navy)}
+.btn--navy{background:var(--navy);color:var(--white)}
+.btn--sm{font-size:.875rem;padding:11px 20px}
+.btn--full{width:100%}
+.btn--flat{box-shadow:0 1px 2px rgba(27,60,127,.14);border-color:transparent;background:var(--orange);color:var(--white)}
+.btn--flat:hover{transform:none;box-shadow:0 1px 2px rgba(27,60,127,.2);background:#d9552f}
+.btn--ghost{background:transparent;border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.8);box-shadow:none}
+.btn--ghost:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,.6);color:var(--white)}
+.btn__arrow{font-size:1.05em;line-height:1}
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--white);border:2px solid var(--navy);border-radius:var(--r-2xl);
+  box-shadow:var(--chunk-card);transition:transform .2s,box-shadow .2s;
+}
+.card:hover{box-shadow:var(--chunk-card-hover);transform:translate(-2px,-3px)}
+.card--tilt{transform:rotate(-2deg)}
+.card--tilt:hover{transform:rotate(0) translate(-2px,-3px)}
+.card__pad{padding:26px}
+.card__media{aspect-ratio:2/1;background:var(--cream);border-bottom:2px solid var(--navy);display:grid;place-items:center;color:var(--ink-45);font-size:.8rem;font-weight:500}
+.card h4{font-family:var(--font-heading);font-weight:700;font-size:1.1rem;color:var(--navy);margin:0 0 8px;line-height:1.3}
+.card p{margin:0;color:var(--ink-70);font-size:.95rem;line-height:1.6}
+.card__link{display:inline-block;margin-top:14px;font-weight:700;font-size:.9rem;color:var(--orange);text-decoration:none}
+.card__link:hover{text-decoration:underline}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:26px;width:100%}
+
+.quote{font-size:1rem;line-height:1.65;color:var(--ink-70);margin:0 0 18px}
+.quote strong{color:var(--navy);font-weight:700}
+.quote__mark{font-family:var(--font-heading);font-size:2.6rem;font-weight:900;color:var(--orange);line-height:.6;display:block;margin-bottom:10px}
+.attrib{display:flex;flex-direction:column;gap:1px}
+.attrib b{font-family:var(--font-heading);color:var(--navy);font-size:.95rem}
+.attrib span{font-size:.82rem;color:var(--ink-45)}
+
+/* ---------- Badges, pills, stage markers ---------- */
+.badge{
+  display:inline-block;padding:6px 15px;border-radius:var(--r-full);
+  border:2px solid var(--navy);background:var(--yellow);color:var(--navy);
+  font-family:var(--font-heading);font-weight:700;font-size:.82rem;transform:rotate(3deg);
+}
+.badge--flat{transform:none;background:var(--cream)}
+.badge--teal{transform:none;background:var(--teal);color:var(--navy)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+
+.stages{display:grid;gap:14px;width:100%}
+.stage{display:flex;align-items:flex-start;gap:18px;padding:18px 20px;border-radius:var(--r-2xl);background:var(--white);border:1px solid var(--line)}
+.stage__num{
+  flex:none;width:48px;height:48px;border-radius:var(--r-xl);display:grid;place-items:center;
+  font-family:var(--font-heading);font-weight:800;font-size:1.1rem;color:var(--white);
+}
+.stage__num--orange{background:var(--orange)}
+.stage__num--navy{background:var(--navy)}
+.stage__num--teal{background:var(--teal);color:var(--navy)}
+.stage h4{font-family:var(--font-heading);font-weight:700;font-size:1.05rem;color:var(--navy);margin:4px 0 3px}
+.stage p{margin:0;color:var(--ink-70);font-size:.92rem}
+
+/* ---------- Forms ---------- */
+.field{display:flex;flex-direction:column;gap:7px;flex:1 1 260px}
+.field label{font-size:.84rem;font-weight:600;color:var(--navy)}
+.input{
+  width:100%;padding:14px 18px;border-radius:var(--r-xl);
+  border:1px solid var(--line);background:var(--white);color:var(--navy);
+  font-family:var(--font-body);font-size:1rem;
+}
+.input::placeholder{color:var(--ink-45)}
+.input:focus{outline:none;border-color:transparent;box-shadow:0 0 0 2px var(--orange)}
+.input--onnavy{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:var(--white)}
+.input--onnavy::placeholder{color:rgba(255,255,255,.45)}
+.form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;width:100%}
+.form-note{font-size:.78rem;color:var(--ink-45);margin:12px 0 0}
+.form-note a{color:inherit}
+
+/* ---------- Navy panel ---------- */
+.panel{background:var(--navy);border-radius:var(--r-3xl);padding:44px;color:var(--white);position:relative;overflow:hidden;width:100%}
+.panel::after{content:"";position:absolute;top:-90px;right:-60px;width:260px;height:260px;border-radius:50%;background:rgba(226,97,61,.18);filter:blur(50px);pointer-events:none}
+.panel h3{font-family:var(--font-heading);font-weight:800;font-size:clamp(1.5rem,3vw,2rem);margin:0 0 12px;position:relative}
+.panel p{color:rgba(255,255,255,.75);margin:0 0 24px;max-width:52ch;position:relative}
+.panel .form-note{color:rgba(255,255,255,.5)}
+.panel .form-row{position:relative}
+
+/* ---------- Nav & footer demos ---------- */
+.navdemo{width:100%;background:var(--white);border:1px solid var(--line);border-radius:var(--r-2xl);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.navdemo__links{display:flex;gap:26px;flex-wrap:wrap}
+.navdemo__links a{font-weight:500;font-size:.95rem;color:var(--navy);text-decoration:none}
+.navdemo__links a:hover{color:var(--orange)}
+
+.footdemo{width:100%;background:var(--cream);border-radius:var(--r-2xl);padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:26px}
+.footdemo h5{font-family:var(--font-heading);font-weight:700;font-size:.9rem;color:var(--navy);margin:0 0 10px}
+.footdemo ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.footdemo a{font-size:.9rem;color:var(--ink-70);text-decoration:none}
+.footdemo a:hover{color:var(--orange)}
+
+/* ---------- Voice ---------- */
+.voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.voice__col{border-radius:var(--r-2xl);padding:24px;border:2px solid var(--navy)}
+.voice__col--do{background:var(--cream)}
+.voice__col--dont{background:var(--white)}
+.voice__col h4{font-family:var(--font-heading);font-weight:800;font-size:1rem;margin:0 0 14px;display:flex;align-items:center;gap:9px;color:var(--navy)}
+.voice__col h4 i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:.78rem;font-weight:900;color:var(--white);flex:none}
+.voice__col--do i{background:#1d7a4c}
+.voice__col--dont i{background:var(--orange)}
+.voice__col ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.voice__col li{font-size:.94rem;line-height:1.55;color:var(--ink-70);padding-left:18px;position:relative}
+.voice__col li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.pullquote{
+  border-left:4px solid var(--orange);background:var(--cream);
+  border-radius:0 var(--r-xl) var(--r-xl) 0;padding:18px 24px;margin:24px 0 0;
+  font-size:1.05rem;line-height:1.6;color:var(--ink-80);
+}
+
+/* ---------- Token reference ---------- */
+.codeblock{
+  background:var(--navy);color:#e8eefb;border-radius:var(--r-2xl);padding:24px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.84rem;line-height:1.7;
+  overflow-x:auto;
+}
+.codeblock .c{color:#8fa8d8}
+.codeblock .k{color:var(--yellow)}
+.codeblock .v{color:#a8e6ef}
+
+/* ---------- Footer ---------- */
+.pagefoot{border-top:1px solid var(--line);padding:28px 24px 44px;text-align:center;color:var(--ink-45);font-size:.85rem}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="wordmark" href="#top">
+      <span class="wordmark__mark" aria-hidden="true">JC</span>
+      <span class="wordmark__text">Jamie Clarke
+        <span class="wordmark__sub">Design System</span>
+      </span>
+    </a>
+    <p class="topbar__meta">v1.0 &middot; derived from jamieclarke.online</p>
+  </div>
+</header>
+
+<div class="shell" id="top">
+
+  <nav class="index" aria-label="Sections">
+    <p class="index__label">Contents</p>
+    <ul class="index__list">
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#colour">Colour</a></li>
+      <li><a href="#type">Typography</a></li>
+      <li><a href="#space">Space &amp; shape</a></li>
+      <li><a href="#elevation">Elevation</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#markers">Badges &amp; steps</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#panels">Panels</a></li>
+      <li><a href="#nav">Nav &amp; footer</a></li>
+      <li><a href="#imagery">Imagery</a></li>
+      <li><a href="#voice">Voice</a></li>
+      <li><a href="#a11y">Accessibility</a></li>
+      <li><a href="#tokens">Tokens</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <p class="eyebrow">Brand &amp; interface guidelines</p>
+      <h1>Making marketing easier.</h1>
+      <p>The visual language behind jamieclarke.online: a navy-and-orange system built on hard-edged
+        borders, offset shadows and plain-English copy. Nothing here is decoration for its own sake —
+        every rule exists so a service business can read the page, trust the person, and take one clear
+        next step.</p>
+      <div class="hero__facts">
+        <span class="fact"><span style="background:#1b3c7f"></span>Navy #1B3C7F</span>
+        <span class="fact"><span style="background:#e2613d"></span>Orange #E2613D</span>
+        <span class="fact"><span style="background:#fbf5ea"></span>Cream #FBF5EA</span>
+        <span class="fact">Gabarito + Maven Pro</span>
+        <span class="fact">2px borders, hard shadows</span>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+      <div class="section__head">
+        <h2>Five principles</h2>
+        <p>If a decision isn't covered by a rule further down this page, decide it with these.</p>
+      </div>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage__num stage__num--orange">1</div>
+          <div><h4>Confident, not corporate</h4><p>Solid borders and hard shadows over soft gradients and glassy blur. The interface should feel drawn with a marker pen, not rendered in a boardroom.</p></div>
+        </div>
+        <div class="stage">
+          <div class="stage__num stage__num--navy">2</div>
+          <div><h4>One next step per screen</h4><p>Orange is reserved for the single action that matters most in view. If two orange buttons compete, one of them is wrong.</p></div>
+        </div>
+        <div class="stage">
+          <div class="stage__num stage__num--teal">3</div>
+          <div><h4>Plain English, always</h4><p>Copy is design material. Short sentences, no jargon, no waffle. Say what the thing does, then say what happens when you click it.</p></div>
+        </div>
+        <div class="stage">
+          <div class="stage__num stage__num--orange">4</div>
+          <div><h4>Warmth over polish</h4><p>Cream backgrounds, hand-drawn stick figures and a slight tilt on a card do more for trust than another stock photo of a handshake.</p></div>
+        </div>
+        <div class="stage">
+          <div class="stage__num stage__num--navy">5</div>
+          <div><h4>Order is the message</h4><p>The Perfect Customer Journey runs six stages in sequence. Where content is genuinely sequential, number it. Where it isn't, don't fake it.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="colour">
+      <div class="section__head">
+        <h2>Colour</h2>
+        <p>Three colours carry the brand and three support it. Navy is the ink, orange is the action,
+          cream is the resting surface. Teal and yellow appear in small doses only — a stage marker, a
+          sticker, a highlight — never as a page background.</p>
+      </div>
+
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#1b3c7f;color:#fff">Ink &amp; structure</div>
+          <div class="swatch__body">
+            <p class="swatch__name">Navy</p>
+            <p class="swatch__hex">#1B3C7F</p>
+            <p class="swatch__use">All body text and headings, every border, every hard shadow. Also used full-bleed for high-contrast panels.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#e2613d;color:#fff">Action</div>
+          <div class="swatch__body">
+            <p class="swatch__name">Orange</p>
+            <p class="swatch__hex">#E2613D</p>
+            <p class="swatch__use">Primary buttons, links inside prose, eyebrow labels, focus rings. One primary action per view.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#fbf5ea;color:#1b3c7f">Surface</div>
+          <div class="swatch__body">
+            <p class="swatch__name">Cream</p>
+            <p class="swatch__hex">#FBF5EA</p>
+            <p class="swatch__use">Section backgrounds, quote blocks, card media wells. The default alternative to white when a band needs separating.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#43bccd;color:#1b3c7f">Support</div>
+          <div class="swatch__body">
+            <p class="swatch__name">Teal</p>
+            <p class="swatch__hex">#43BCCD</p>
+            <p class="swatch__use">Third colour in a numbered sequence, chart series, small illustration fills. Never for text on white.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#f9c80e;color:#1b3c7f">Highlight</div>
+          <div class="swatch__body">
+            <p class="swatch__name">Yellow</p>
+            <p class="swatch__hex">#F9C80E</p>
+            <p class="swatch__use">Sticker badges (&ldquo;Free&rdquo;, &ldquo;New&rdquo;) and marker-pen emphasis. Always with navy text and a navy border.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background:#f6f7fb;color:#1b3c7f">Neutral</div>
+          <div class="swatch__body">
+            <p class="swatch__name">Mist</p>
+            <p class="swatch__hex">#F6F7FB</p>
+            <p class="swatch__use">A navy-biased grey for inert list rows and code wells. Use navy at low opacity for rules and muted text instead of grey.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Transparency ladder</h3>
+      <p class="bodycopy" style="max-width:62ch">Secondary text is navy at reduced opacity rather than a separate grey — it keeps the
+        page tonally unified. Use <code>navy/70</code> for body copy on white, <code>navy/45</code> for captions,
+        <code>navy/12</code> for hairline rules.</p>
+
+      <h3 class="sub">Contrast</h3>
+      <div class="table-wrap">
+        <table class="ratios">
+          <thead><tr><th>Pairing</th><th>Ratio</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr><td>Navy on white</td><td>10.50</td><td class="pass">AAA — default body text</td></tr>
+            <tr><td>Navy on cream</td><td>9.68</td><td class="pass">AAA — body text on cream bands</td></tr>
+            <tr><td>White on navy</td><td>10.50</td><td class="pass">AAA — navy panels</td></tr>
+            <tr><td>Navy on yellow</td><td>6.65</td><td class="pass">AA — sticker badges</td></tr>
+            <tr><td>Navy on teal</td><td>4.66</td><td class="pass">AA — stage markers</td></tr>
+            <tr><td>White on orange</td><td>3.49</td><td class="warn">Large text only — set buttons at 16px/700 or above</td></tr>
+            <tr><td>Orange on white</td><td>3.49</td><td class="warn">Large or bold text only — never for body copy</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Orange is a brand accent, not a text colour. Where orange text is small — eyebrow labels, inline links — set it at 700 weight and pair it with an underline or an adjacent navy label so colour is never the only signal.</p>
+    </section>
+
+    <section class="section" id="type">
+      <div class="section__head">
+        <h2>Typography</h2>
+        <p><strong>Gabarito</strong> sets everything that shouts: headings, buttons, numbers, labels.
+          <strong>Maven Pro</strong> sets everything that explains. Two families, no exceptions.</p>
+      </div>
+
+      <div class="specimen">
+        <div class="spec-row">
+          <div class="spec-row__meta">Display / H1<br>Gabarito 800<br>2.25 → 3.5rem<br>lh 1.15 · ls −.015em</div>
+          <p class="d1">Making marketing easier.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-row__meta">Section / H2<br>Gabarito 800<br>1.6 → 2.25rem<br>lh 1.2</div>
+          <p class="d2">You're not bad at marketing.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-row__meta">Card / H3<br>Gabarito 700<br>1.25rem · lh 1.4</div>
+          <p class="d3">The Perfect Customer Journey</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-row__meta">Eyebrow<br>Gabarito 700<br>.75rem · uppercase<br>ls .14em</div>
+          <p class="label-ex">Things I'm working on</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-row__meta">Lead<br>Maven Pro 400<br>1.125rem · lh 1.7</div>
+          <p class="lead">I help business owners get found, get enquiries and get customers — through strategy, websites, automation and AI.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-row__meta">Body<br>Maven Pro 400<br>1rem · lh 1.6</div>
+          <p class="bodycopy">The problem was never effort. It was order. Starting five things, finishing none. Half-built bridges everywhere — and a half-built bridge gets nobody to the other side.</p>
+        </div>
+        <div class="spec-row">
+          <div class="spec-row__meta">Small / caption<br>Maven Pro 400<br>.875rem · navy/45</div>
+          <p class="small">By signing up you agree to receive marketing emails. Unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Rules</h3>
+      <ul style="color:var(--ink-70);max-width:64ch;line-height:1.7">
+        <li>Headings are set in sentence case with a full stop when they read as a statement (&ldquo;Sound familiar?&rdquo;, &ldquo;Things I'm working on.&rdquo;). Title Case is reserved for proper nouns like The Marketing Memo.</li>
+        <li>Body copy stays between 60 and 70 characters per line. Long paragraphs get broken up, not justified.</li>
+        <li>Bold inside a paragraph is navy, never orange — it marks the sentence worth remembering.</li>
+        <li>Never set body copy in Gabarito, and never set a button in Maven Pro.</li>
+        <li>Weights in use: Gabarito 700 / 800 / 900, Maven Pro 400 / 500 / 600 / 700. Nothing else.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="space">
+      <div class="section__head">
+        <h2>Space &amp; shape</h2>
+        <p>A 4px base unit drives every gap, and four corner radii cover every surface. Bigger surface, bigger radius.</p>
+      </div>
+
+      <h3 class="sub">Spacing scale</h3>
+      <div class="scale">
+        <div class="scale__row"><span class="scale__key">2</span><span class="scale__val">8px</span><div class="scale__bar" style="width:8px"></div></div>
+        <div class="scale__row"><span class="scale__key">3</span><span class="scale__val">12px</span><div class="scale__bar" style="width:12px"></div></div>
+        <div class="scale__row"><span class="scale__key">4</span><span class="scale__val">16px</span><div class="scale__bar" style="width:16px"></div></div>
+        <div class="scale__row"><span class="scale__key">6</span><span class="scale__val">24px</span><div class="scale__bar" style="width:24px"></div></div>
+        <div class="scale__row"><span class="scale__key">8</span><span class="scale__val">32px</span><div class="scale__bar" style="width:32px"></div></div>
+        <div class="scale__row"><span class="scale__key">12</span><span class="scale__val">48px</span><div class="scale__bar" style="width:48px"></div></div>
+        <div class="scale__row"><span class="scale__key">16</span><span class="scale__val">64px</span><div class="scale__bar" style="width:64px"></div></div>
+        <div class="scale__row"><span class="scale__key">20</span><span class="scale__val">80px</span><div class="scale__bar" style="width:80px"></div></div>
+        <div class="scale__row"><span class="scale__key">24</span><span class="scale__val">96px</span><div class="scale__bar" style="width:96px"></div></div>
+      </div>
+      <p class="note">Section padding runs 48px on mobile, 80px on tablet, 96px on desktop. The page container is 1280px wide with 16 / 24 / 32px gutters.</p>
+
+      <h3 class="sub">Corner radii</h3>
+      <div class="radii">
+        <div class="radius-demo"><div style="border-radius:.5rem"></div><p>lg · 8px<br>chips, flat buttons</p></div>
+        <div class="radius-demo"><div style="border-radius:.75rem"></div><p>xl · 12px<br>buttons, inputs</p></div>
+        <div class="radius-demo"><div style="border-radius:1rem"></div><p>2xl · 16px<br>cards</p></div>
+        <div class="radius-demo"><div style="border-radius:1.5rem"></div><p>3xl · 24px<br>full-width panels</p></div>
+        <div class="radius-demo"><div style="border-radius:9999px"></div><p>full<br>badges, avatars</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="elevation">
+      <div class="section__head">
+        <h2>Elevation — the chunky shadow</h2>
+        <p>The signature of the brand. Elements don't float on a blur; they sit on a solid navy offset,
+          like a sticker on a page. Two variants: <code>btn-chunky</code> for controls,
+          <code>card-chunky</code> for containers.</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo__caption">Hover and press either element — the shadow grows on hover and collapses on click.</p>
+        <a href="#elevation" class="btn btn--primary">Get your free web review</a>
+        <div class="card" style="max-width:280px">
+          <div class="card__pad">
+            <h4>card-chunky</h4>
+            <p>2px navy border · 5px offset shadow, growing to 8px with a −2px / −3px lift on hover.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="ratios">
+          <thead><tr><th>State</th><th>Button</th><th>Card</th></tr></thead>
+          <tbody>
+            <tr><td>Rest</td><td>4px 4px 0 navy</td><td>5px 5px 0 navy</td></tr>
+            <tr><td>Hover</td><td>7px 7px 0 navy, translate(−2px, −2px)</td><td>8px 8px 0 navy, translate(−2px, −3px)</td></tr>
+            <tr><td>Active</td><td>1px 1px 0 navy, translate(2px, 2px)</td><td>—</td></tr>
+            <tr><td>Transition</td><td>180ms transform + box-shadow</td><td>200ms transform + box-shadow</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Soft shadows still exist, but only for things that genuinely float above the page: sticky headers, the cookie bar, dropdowns. Never mix a soft shadow and a chunky shadow on the same element.</p>
+    </section>
+
+    <section class="section" id="buttons">
+      <div class="section__head">
+        <h2>Buttons</h2>
+        <p>Gabarito 700, 12px radius, 2px navy border, chunky shadow. Label the outcome, not the mechanic:
+          &ldquo;Get your free web review&rdquo;, not &ldquo;Submit&rdquo;.</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo__caption">Primary · Secondary · Navy · Small</p>
+        <a href="#buttons" class="btn btn--primary">Get your free web review</a>
+        <a href="#buttons" class="btn btn--secondary">How I can help</a>
+        <a href="#buttons" class="btn btn--navy">Learn the full framework <span class="btn__arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="#buttons" class="btn btn--primary btn--sm">Get The Memo</a>
+      </div>
+
+      <div class="demo demo--navy">
+        <p class="demo__caption">On navy, the primary button keeps its orange fill; the secondary flips to white. A ghost button is for genuinely minor actions only.</p>
+        <a href="#buttons" class="btn btn--primary">Get The Memo</a>
+        <a href="#buttons" class="btn btn--secondary">Read my full story</a>
+        <a href="#buttons" class="btn btn--ghost">No thanks</a>
+      </div>
+
+      <h3 class="sub">Rules</h3>
+      <ul style="color:var(--ink-70);max-width:64ch;line-height:1.7">
+        <li>One orange button per viewport. A second action is always the white secondary.</li>
+        <li>Minimum tap target 44px tall — 14px vertical padding at 16px text clears it.</li>
+        <li>Arrows point right and sit after the label with an 8px gap. No arrow on form submits.</li>
+        <li>Full-width buttons are for forms and mobile menus only.</li>
+        <li>Flat buttons (no border, soft shadow) exist for dense UI inside a card — cookie bars, inline signup rows — where a chunky shadow would be too loud.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="cards">
+      <div class="section__head">
+        <h2>Cards</h2>
+        <p>White fill, navy border, chunky shadow, 16px radius. A card is a link target: the whole
+          surface is clickable, and the hover lift is the affordance.</p>
+      </div>
+
+      <div class="demo">
+        <div class="card-grid">
+          <article class="card">
+            <div class="card__media">Product screenshot · 2:1</div>
+            <div class="card__pad">
+              <h4>Your Web Review</h4>
+              <p>A free tool that scores your website and shows you exactly what to fix.</p>
+              <span class="card__link">yourwebreview.com &rarr;</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__pad">
+              <p class="tag">Marketing Strategy</p>
+              <h4 style="margin-top:10px">Local SEO for Service Businesses</h4>
+              <p>Local SEO doesn't have to be complicated. Here's what actually matters if you want local customers to find you on Google.</p>
+              <span class="card__link">Read the article &rarr;</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__pad">
+              <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+              <p class="quote">Jamie is brilliant at pinpointing exactly what's wrong with a website and quickly making it 10X better. <strong>He genuinely wants to make it better so you can grow.</strong></p>
+              <div class="attrib"><b>Jillian Kendrick</b><span>Business Owner</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="demo demo--cream">
+        <p class="demo__caption">Tilt variant — up to 2&deg; of rotation, straightening on hover. Use once per section, never on a grid of cards.</p>
+        <div class="card card--tilt" style="max-width:340px">
+          <div class="card__pad">
+            <h4>Marketing without a plan is a jigsaw without the picture on the box.</h4>
+            <p>Pull-out cards like this carry the one line you want someone to remember.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="markers">
+      <div class="section__head">
+        <h2>Badges &amp; step markers</h2>
+        <p>Badges are stickers: pill shape, navy border, tilted a few degrees. Step markers are squares
+          with an 12px radius and a solid fill, cycling orange → navy → teal.</p>
+      </div>
+
+      <div class="demo">
+        <p class="demo__caption">Badges</p>
+        <span class="badge">Free forever</span>
+        <span class="badge badge--flat">New</span>
+        <span class="badge badge--teal">Beta</span>
+        <span class="tag" style="align-self:center">Eyebrow label</span>
+      </div>
+
+      <div class="demo demo--stack">
+        <p class="demo__caption">Step markers — only for genuinely sequential content, like the six stages of the Perfect Customer Journey</p>
+        <div class="stages">
+          <div class="stage"><div class="stage__num stage__num--orange">1</div><div><h4>Get Noticed</h4><p>Get visible to the right people.</p></div></div>
+          <div class="stage"><div class="stage__num stage__num--navy">2</div><div><h4>Connect</h4><p>Capture contact details.</p></div></div>
+          <div class="stage"><div class="stage__num stage__num--teal">3</div><div><h4>Engage</h4><p>Build trust and demonstrate value.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="forms">
+      <div class="section__head">
+        <h2>Forms</h2>
+        <p>Inputs are quiet so the button can be loud: 1px navy hairline, 12px radius, generous padding.
+          Focus is a 2px orange ring — the one place orange appears without being a call to action.</p>
+      </div>
+
+      <div class="demo demo--stack">
+        <p class="demo__caption">Email capture — the site's most common form</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="ds-email">Your email</label>
+            <input class="input" id="ds-email" type="email" placeholder="you@yourbusiness.co.uk">
+          </div>
+          <button class="btn btn--primary" type="button">Get The Memo</button>
+        </div>
+        <p class="form-note">By signing up you agree to receive marketing emails. Unsubscribe anytime. <a href="#forms">Privacy policy</a>.</p>
+      </div>
+
+      <h3 class="sub">Messages</h3>
+      <ul style="color:var(--ink-70);max-width:64ch;line-height:1.7">
+        <li>Success reads like a person: <em>&ldquo;You're in! Check your inbox.&rdquo;</em></li>
+        <li>Errors say what to do next, not what the system did: <em>&ldquo;Something went wrong. Please try again.&rdquo;</em></li>
+        <li>Every input has a visible or screen-reader label. Placeholder text is an example, never the label.</li>
+        <li>Legal microcopy sits under the button at .78rem in navy/45, with the privacy link underlined.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="panels">
+      <div class="section__head">
+        <h2>Navy panels</h2>
+        <p>Once or twice a page, the ground flips to navy. It marks the moments that matter most —
+          the newsletter signup, the closing call to action — and gives the page a spine.</p>
+      </div>
+
+      <div class="demo" style="background:transparent;padding:0;border:0">
+        <div class="panel">
+          <h3>The Marketing Memo</h3>
+          <p>One marketing idea, every day at 4pm. Two minutes to read, written by me, and it's the same
+            advice I give paying clients. Free, and it always will be.</p>
+          <div class="form-row">
+            <div class="field">
+              <label for="ds-email2" style="color:rgba(255,255,255,.8)">Your email</label>
+              <input class="input input--onnavy" id="ds-email2" type="email" placeholder="you@yourbusiness.co.uk">
+            </div>
+            <button class="btn btn--primary" type="button">Get The Memo</button>
+          </div>
+          <p class="form-note">You can reply to any issue. I actually read them.</p>
+        </div>
+      </div>
+      <p class="note">Inside a navy panel: white headings, white/75 body, white/10 input fills with white/20 borders. A single soft orange glow may sit behind the panel edge — one per panel, never animated.</p>
+    </section>
+
+    <section class="section" id="nav">
+      <div class="section__head">
+        <h2>Navigation &amp; footer</h2>
+        <p>The header is a sticky white bar at 95% opacity with a hairline base and one orange button on
+          the right. The footer drops to cream and groups links under three headings.</p>
+      </div>
+
+      <div class="demo demo--stack">
+        <div class="navdemo">
+          <a class="wordmark" href="#nav">
+            <span class="wordmark__mark" aria-hidden="true">JC</span>
+            <span class="wordmark__text">Jamie Clarke</span>
+          </a>
+          <div class="navdemo__links">
+            <a href="#nav">Blog</a><a href="#nav">Work With Me</a><a href="#nav">Portfolio</a><a href="#nav">The Memo</a>
+          </div>
+          <a href="#nav" class="btn btn--primary btn--sm">Free Web Review</a>
+        </div>
+
+        <div class="footdemo">
+          <div>
+            <h5>Jamie Clarke</h5>
+            <p class="small" style="margin:0">Making marketing easier for service businesses.</p>
+          </div>
+          <div><h5>Explore</h5><ul><li><a href="#nav">Blog</a></li><li><a href="#nav">The PCJ</a></li><li><a href="#nav">About</a></li><li><a href="#nav">Tools</a></li></ul></div>
+          <div><h5>Work With Me</h5><ul><li><a href="#nav">The Marketing Memo</a></li><li><a href="#nav">Your Web Review</a></li><li><a href="#nav">Book a Call</a></li></ul></div>
+          <div><h5>Connect</h5><ul><li><a href="#nav">LinkedIn</a></li><li><a href="#nav">Facebook</a></li><li><a href="#nav">Substack</a></li></ul></div>
+        </div>
+      </div>
+      <p class="note">Header height 80px on mobile, 96px on desktop. Nav links are Maven Pro 500 in navy, turning orange on hover. Below 768px the links collapse into a full-width menu with the orange button pinned to the bottom.</p>
+    </section>
+
+    <section class="section" id="imagery">
+      <div class="section__head">
+        <h2>Imagery &amp; illustration</h2>
+        <p>Three image types, and nothing else. If a picture doesn't fit one of these, it doesn't go on the site.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card"><div class="card__pad">
+          <h4>Stick-figure illustrations</h4>
+          <p>Hand-drawn line figures on transparent backgrounds, used to make an idea land — the jigsaw with no picture on the box, the half-built bridges. Navy line work, one accent colour maximum. Always captioned in navy/45.</p>
+        </div></article>
+        <article class="card"><div class="card__pad">
+          <h4>Photography of Jamie</h4>
+          <p>Real, unposed, outdoors or at the desk. Portraits crop to 4:5 on mobile and 3:4 on desktop with a 16px radius. No stock photography of anyone else, ever.</p>
+        </div></article>
+        <article class="card"><div class="card__pad">
+          <h4>Product screenshots</h4>
+          <p>Project cards use a 2:1 well on cream. Screenshots sit square to the frame, no perspective mockups, no floating device shells.</p>
+        </div></article>
+      </div>
+      <p class="note">Decorative shapes — the soft orange blur behind a hero, the rotated cream slab behind a portrait — are allowed at very low opacity (5–10%) and must never sit behind body text.</p>
+    </section>
+
+    <section class="section" id="voice">
+      <div class="section__head">
+        <h2>Voice &amp; tone</h2>
+        <p>British English, second person, contractions throughout. Jamie talks to one business owner at
+          a time — not to a market.</p>
+      </div>
+
+      <div class="voice">
+        <div class="voice__col voice__col--do">
+          <h4><i aria-hidden="true">&check;</i> Do</h4>
+          <ul>
+            <li>Name the reader's situation before offering the fix: &ldquo;You're posting on social media but the phone isn't ringing.&rdquo;</li>
+            <li>Use one concrete metaphor and follow it through — the jigsaw, the half-built bridge.</li>
+            <li>Keep sentences short. Fragments are fine. They land.</li>
+            <li>Be specific about what's free and what isn't. Say the price of the next step.</li>
+            <li>Let a little personality in — the golf, the Manchester United line — then get back to the point.</li>
+          </ul>
+        </div>
+        <div class="voice__col voice__col--dont">
+          <h4><i aria-hidden="true">&times;</i> Don't</h4>
+          <ul>
+            <li>Don't use agency language: leverage, synergy, solutions, bespoke, cutting-edge.</li>
+            <li>Don't blame the reader. The problem is the order things were done in, not their ability.</li>
+            <li>Don't stack three adjectives where one verb will do.</li>
+            <li>Don't promise numbers you can't evidence. Testimonials carry the proof instead.</li>
+            <li>Don't write a heading that could sit on anyone else's website.</li>
+          </ul>
+        </div>
+      </div>
+
+      <blockquote class="pullquote">You're not bad at marketing. You're just doing things in the wrong order.</blockquote>
+      <p class="note">The house line. It sets the tone for everything else: sympathetic about the problem, blunt about the cause, confident about the fix.</p>
+    </section>
+
+    <section class="section" id="a11y">
+      <div class="section__head">
+        <h2>Accessibility</h2>
+        <p>The chunky style is high-contrast by nature. These are the rules that keep it that way.</p>
+      </div>
+      <ul style="color:var(--ink-70);max-width:64ch;line-height:1.8">
+        <li><strong>Focus is always visible.</strong> A 3px orange outline at 3px offset, on every interactive element. Never remove it without replacing it.</li>
+        <li><strong>Orange text is bold or large.</strong> At 3.49:1 it fails AA for small body text — see the contrast table.</li>
+        <li><strong>Colour is never the only signal.</strong> Links inside prose are bold and underline on hover; step markers carry a number as well as a fill.</li>
+        <li><strong>Motion is optional.</strong> All hover lifts and the logo marquee respect <code>prefers-reduced-motion</code>.</li>
+        <li><strong>Headings nest properly.</strong> One h1 per page, no level skipped for visual reasons — size comes from a class, not from the tag.</li>
+        <li><strong>Tap targets are 44px.</strong> Including nav links and the footer's social icons.</li>
+        <li><strong>Every image has alt text</strong> that describes the idea, not the file: &ldquo;Stick figure looking at three bridges — only one fully built across the gap.&rdquo;</li>
+      </ul>
+    </section>
+
+    <section class="section" id="tokens">
+      <div class="section__head">
+        <h2>Tokens</h2>
+        <p>Drop-in definitions. The live site runs Tailwind v4 on Astro, so the theme block is the source
+          of truth; the CSS variables mirror it for anything outside Tailwind.</p>
+      </div>
+
+      <h3 class="sub">Tailwind v4 theme</h3>
+      <div class="codeblock"><span class="c">/* app.css */</span>
+@import <span class="v">"tailwindcss"</span>;
+
+@theme {
+  <span class="k">--color-navy</span>: <span class="v">#1b3c7f</span>;
+  <span class="k">--color-orange</span>: <span class="v">#e2613d</span>;
+  <span class="k">--color-cream</span>: <span class="v">#fbf5ea</span>;
+  <span class="k">--color-teal</span>: <span class="v">#43bccd</span>;
+  <span class="k">--color-yellow</span>: <span class="v">#f9c80e</span>;
+
+  <span class="k">--font-heading</span>: <span class="v">"Gabarito", sans-serif</span>;
+  <span class="k">--font-body</span>: <span class="v">"Maven Pro", sans-serif</span>;
+}
+
+@layer components {
+  <span class="k">.btn-chunky</span> {
+    border: 2px solid <span class="v">var(--color-navy)</span>;
+    box-shadow: 4px 4px 0 <span class="v">var(--color-navy)</span>;
+    transition: transform .18s, box-shadow .18s;
+  }
+  <span class="k">.btn-chunky:hover</span>  { box-shadow: 7px 7px 0 var(--color-navy); transform: translate(-2px,-2px); }
+  <span class="k">.btn-chunky:active</span> { box-shadow: 1px 1px 0 var(--color-navy); transform: translate(2px,2px); }
+
+  <span class="k">.card-chunky</span> {
+    border: 2px solid <span class="v">var(--color-navy)</span>;
+    box-shadow: 5px 5px 0 <span class="v">var(--color-navy)</span>;
+    transition: transform .2s, box-shadow .2s;
+  }
+  <span class="k">.card-chunky:hover</span> { box-shadow: 8px 8px 0 var(--color-navy); transform: translate(-2px,-3px); }
+}</div>
+
+      <h3 class="sub">Class recipes</h3>
+      <div class="codeblock"><span class="c">/* Primary button */</span>
+btn-chunky inline-flex items-center gap-2 px-6 py-3.5 bg-orange text-white
+font-heading font-bold text-base rounded-xl
+
+<span class="c">/* Secondary button */</span>
+btn-chunky inline-flex items-center gap-2 px-6 py-3.5 bg-white text-navy
+font-heading font-bold text-base rounded-xl
+
+<span class="c">/* Card */</span>
+card-chunky bg-white rounded-2xl overflow-hidden group block
+
+<span class="c">/* Eyebrow */</span>
+inline-block text-xs font-bold text-orange uppercase tracking-wider mb-3
+
+<span class="c">/* Sticker badge */</span>
+inline-block bg-yellow text-navy font-heading font-bold text-sm px-4 py-1.5
+rounded-full border-2 border-navy rotate-3
+
+<span class="c">/* Step marker */</span>
+flex-shrink-0 w-12 h-12 rounded-xl bg-orange text-white font-heading
+font-extrabold text-lg flex items-center justify-center
+
+<span class="c">/* Input */</span>
+w-full px-5 py-3.5 rounded-xl border border-navy/10 bg-white text-navy
+placeholder-navy/30 focus:outline-none focus:ring-2 focus:ring-orange
+
+<span class="c">/* Section container */</span>
+max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24</div>
+
+      <h3 class="sub">Fonts</h3>
+      <div class="codeblock">&lt;link rel=<span class="v">"stylesheet"</span> href=<span class="v">"https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700;800;900&amp;family=Maven+Pro:wght@400;500;600;700&amp;display=swap"</span>&gt;</div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="pagefoot">
+  Jamie Clarke Design System · v1.0 · documented from the live build of jamieclarke.online
+</footer>
+
+</body>
+</html>
