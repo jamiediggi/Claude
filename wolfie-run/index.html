@@ -1,0 +1,836 @@
+<title>Wolfie Run</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: one floodlit night-match pitch on a canvas, centred; scoreboard-style panels float over it.
+   Deliberately single-theme: it is always a night match under the floodlights. */
+:root {
+  --night: #0a1328;
+  --night-2: #14244a;
+  --wire-blue: #1d4ea3;
+  --primrose: #f2df6b;
+  --chalk: #f4f6ef;
+  --muted: #a9b8dc;
+  --display: 'Bungee', Impact, 'Arial Black', system-ui, sans-serif;
+  --body: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  background: radial-gradient(120% 80% at 50% 0%, var(--night-2), var(--night) 70%) var(--night);
+  color: var(--chalk);
+  font-family: var(--body);
+  font-size: 18px;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.app {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  padding-inline: 16px;
+  padding-block: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.masthead {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+.brand {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(20px, 3.4vw, 30px);
+  letter-spacing: 0.02em;
+  color: var(--primrose);
+}
+.brand span { color: var(--chalk); }
+.tagline {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.stage {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px var(--wire-blue), 0 0 0 4px rgba(242, 223, 107, 0.35), 0 18px 50px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  touch-action: none;
+  max-width: 100%;
+}
+.stage:focus-visible { outline: 3px solid var(--primrose); outline-offset: 4px; }
+canvas { display: block; }
+.footnote {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+  text-wrap: balance;
+}
+.rotate-hint { display: none; color: var(--primrose); }
+@media (orientation: portrait) and (max-width: 600px) { .rotate-hint { display: inline; } }
+
+kbd {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.9em;
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(242, 223, 107, 0.5);
+  border-bottom-width: 3px;
+  color: var(--chalk);
+}
+
+/* Overlay panels: styled like a stadium scoreboard */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-inline: 16px;
+  background: rgba(6, 12, 28, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 5;
+}
+.panel {
+  width: min(420px, 100%);
+  box-sizing: border-box;
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  background: linear-gradient(180deg, #13285a, #0b1736);
+  border: 2px solid var(--primrose);
+  border-radius: 10px;
+  box-shadow: 0 0 0 6px rgba(29, 78, 163, 0.6), 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.eyebrow {
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primrose);
+}
+.panel h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(34px, 8vw, 46px);
+  line-height: 1;
+  color: var(--chalk);
+  text-shadow: 3px 3px 0 var(--wire-blue);
+  text-wrap: balance;
+}
+.panel p { margin: 0; line-height: 1.3; max-width: 34ch; }
+.panel .keys { color: var(--muted); font-size: 16px; }
+.stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 2px 0 0;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 4px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(169, 184, 220, 0.25);
+}
+.stat dt { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.stat dd { margin: 0; font-family: var(--display); font-size: 24px; color: var(--primrose); font-variant-numeric: tabular-nums; }
+.chip {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--night);
+  background: var(--primrose);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.btn {
+  font-family: var(--display);
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--night);
+  background: var(--primrose);
+  border: 0;
+  border-radius: 6px;
+  padding: 12px 28px 10px;
+  box-shadow: 0 4px 0 #b9a43e;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+.btn:hover { background: #fff0a0; }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #b9a43e; }
+.btn:focus-visible { outline: 3px solid var(--chalk); outline-offset: 3px; }
+.sub { color: var(--muted); font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+
+<div class="app" id="app">
+  <header class="masthead" id="masthead">
+    <h1 class="brand">Wolfie <span>Run</span></h1>
+    <p class="tagline">Unofficial fan game &middot; Primrose &amp; Blue</p>
+  </header>
+
+  <div class="stage" id="stage" tabindex="0" aria-label="Game pitch. Press Space or tap to jump.">
+    <canvas id="game" aria-hidden="true"></canvas>
+  </div>
+
+  <p class="footnote" id="footnote"><kbd>Space</kbd> or tap to jump &middot; hold for a higher leap &middot; every 100&nbsp;m is a try <span class="rotate-hint">&middot; turn your phone sideways for a bigger pitch</span></p>
+
+  <div class="overlay" id="startPanel">
+    <div class="panel" role="dialog" aria-labelledby="startTitle">
+      <p class="eyebrow">Night match &middot; Kick-off</p>
+      <h2 id="startTitle">Wolfie Run</h2>
+      <p>Wolfie has broken down the wing. Hurdle the tackle bags, hit shields, kicking tees and defenders, and leap the waterlogged patches.</p>
+      <p class="keys"><kbd>Space</kbd> or tap to jump. Hold for a higher leap.</p>
+      <button class="btn" id="startBtn" type="button">Kick off</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overPanel" hidden>
+    <div class="panel" role="dialog" aria-labelledby="overTitle" aria-live="polite">
+      <p class="eyebrow" id="overEyebrow">Full time</p>
+      <h2 id="overTitle">Tackled!</h2>
+      <p id="overReason">Smashed in the tackle.</p>
+      <span class="chip" id="newBest" hidden>New best</span>
+      <dl class="stats">
+        <div class="stat"><dt>Distance</dt><dd id="statDist">0 m</dd></div>
+        <div class="stat"><dt>Tries</dt><dd id="statTries">0</dd></div>
+        <div class="stat"><dt>Best</dt><dd id="statBest">0 m</dd></div>
+      </dl>
+      <button class="btn" id="restartBtn" type="button">Restart</button>
+      <p class="sub">or press <kbd>Space</kbd></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // ---------- constants (logical units; 20 units = 1 metre) ----------
+  const H = 300, GY = 228, G = 2500, JV = 800, CUT = 420;
+  const COYOTE = 0.09, BUFFER = 0.13, UPM = 20;
+  const START_SPEED = 310, MAX_SPEED = 800;
+  const TRY_EVERY = 100 * UPM;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const C = {
+    skyTop: '#040915', skyLow: '#16306a',
+    standDark: '#0c1630', standRoof: '#1a2a52',
+    turf: '#2e7a3a', turfLight: '#37894a', turfEdge: '#4fa35f',
+    soil: '#3a2818', soilDark: '#1f150c', mud: '#4b3b21', mudShine: '#7a6a42',
+    chalk: '#f4f6ef', primrose: '#f2df6b', blue: '#1d4ea3', blueDark: '#163c7d',
+    fur: '#939db1', furDark: '#6c7589', furLight: '#eef1f6', ink: '#11151f',
+    rival: '#c8312f', rivalDark: '#8f1f1d', skin: '#d6a179',
+  };
+
+  // ---------- DOM ----------
+  const app = document.getElementById('app');
+  const stage = document.getElementById('stage');
+  const cvs = document.getElementById('game');
+  const ctx = cvs.getContext('2d');
+  const masthead = document.getElementById('masthead');
+  const footnote = document.getElementById('footnote');
+  const startPanel = document.getElementById('startPanel');
+  const overPanel = document.getElementById('overPanel');
+  const startBtn = document.getElementById('startBtn');
+  const restartBtn = document.getElementById('restartBtn');
+
+  // ---------- sizing ----------
+  let LW = 760, scale = 1, PX = 120, dpr = 1;
+  function resize() {
+    const availW = Math.max(240, Math.min(app.clientWidth - 32, 1100));
+    const availH = Math.max(160, window.innerHeight - masthead.offsetHeight - footnote.offsetHeight - 50);
+    LW = Math.max(520, Math.min(960, (availW / availH) * H));
+    scale = Math.min(availW / LW, availH / H);
+    const cw = Math.floor(LW * scale), ch = Math.floor(H * scale);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cvs.style.width = cw + 'px';
+    cvs.style.height = ch + 'px';
+    cvs.width = Math.round(cw * dpr);
+    cvs.height = Math.round(ch * dpr);
+    PX = Math.round(Math.max(90, Math.min(150, LW * 0.16)));
+  }
+  window.addEventListener('resize', resize);
+
+  // ---------- storage ----------
+  function loadBest() { try { return Number(localStorage.getItem('wolfie-run-best')) || 0; } catch (e) { return 0; } }
+  function saveBest(v) { try { localStorage.setItem('wolfie-run-best', String(v)); } catch (e) { /* ignore */ } }
+
+  // ---------- helpers ----------
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const hash = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  function rr(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function limb(x, y, ang, len, width, col) {
+    const x2 = x + Math.sin(ang) * len, y2 = y + Math.cos(ang) * len;
+    ctx.strokeStyle = col; ctx.lineWidth = width; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x2, y2); ctx.stroke();
+    return [x2, y2];
+  }
+  function ellipse(x, y, rx, ry, rot, col) {
+    ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); ctx.fill();
+  }
+  function shadow(cx, w) { ellipse(cx, GY + 3, w, 3.5, 0, 'rgba(0,0,0,0.28)'); }
+
+  // ---------- obstacle catalogue ----------
+  const TYPES = {
+    tee:      { w: 26, h: 26, unlock: 0,    weight: 3, inset: 4, reason: 'Tripped over the kicking tee.' },
+    bag:      { w: 24, h: 54, unlock: 0,    weight: 4, inset: 3, reason: 'Flattened by a tackle bag.' },
+    shield:   { w: 22, h: 42, unlock: 0,    weight: 3, inset: 3, reason: 'Bounced off a hit shield.' },
+    cones:    { w: 64, h: 16, unlock: 600,  weight: 2, inset: 3, reason: 'Tangled up in the training cones.' },
+    flag:     { w: 16, h: 58, unlock: 1500, weight: 2, inset: 3, reason: 'Wiped out the corner flag. Touch in goal!' },
+    defender: { w: 34, h: 50, unlock: 2500, weight: 4, inset: 4, reason: 'Smashed in a big hit by the defender.' },
+    bags2:    { w: 52, h: 54, unlock: 7000, weight: 2, inset: 3, reason: 'Ran straight into a wall of tackle bags.' },
+  };
+  function pickType() {
+    const pool = Object.entries(TYPES).filter(([, t]) => cam >= t.unlock);
+    let total = pool.reduce((s, [, t]) => s + t.weight, 0), r = Math.random() * total;
+    for (const [k, t] of pool) { r -= t.weight; if (r <= 0) return k; }
+    return pool[0][0];
+  }
+
+  // ---------- state ----------
+  let state = 'ready'; // ready | run | dying | over
+  let cam, speed, player, gaps, obs, parts, nextSpawn, tries, tryFlash, shake, deathT, deathKind, canRestart, celebrate, clock, dustT;
+  let best = loadBest();
+
+  function reset() {
+    cam = 0; speed = START_SPEED; clock = 0; dustT = 0;
+    player = { y: GY, vy: 0, onGround: true, coyote: 0, buffer: 0, holding: false, phase: 0, rot: 0, dx: 0 };
+    gaps = []; obs = []; parts = [];
+    nextSpawn = 760; tries = 0; tryFlash = 0; shake = 0; celebrate = 0; deathT = 0; deathKind = null;
+  }
+
+  function addObs(type, x) { const t = TYPES[type]; obs.push({ type, x, w: t.w, h: t.h, seed: Math.random() * 10 }); return x + t.w; }
+  function addGap(x) {
+    const maxW = Math.min(60 + speed * 0.22, speed * 0.64 * 0.55 + 30);
+    const w = rand(55, Math.max(62, maxW));
+    gaps.push({ x, w }); return x + w;
+  }
+  function spawn() {
+    const x = nextSpawn, d = Math.min(1, cam / 30000);
+    let end = Math.random() < 0.26 && x > 1400 ? addGap(x) : addObs(pickType(), x);
+    if (cam > 3000 && Math.random() < 0.16 + d * 0.22) {
+      const x2 = end + speed * 0.62 + rand(50, 100);
+      end = Math.random() < 0.35 ? addGap(x2) : addObs(pickType(), x2);
+    }
+    nextSpawn = end + speed * 0.62 + 70 + rand(0, speed * (1.15 - d * 0.6));
+  }
+  function overGap(wx) { for (const g of gaps) if (wx > g.x + 7 && wx < g.x + g.w - 7) return true; return false; }
+
+  // ---------- particles ----------
+  function puff(x, y, n, col, spread, up, life, size, grav) {
+    for (let i = 0; i < n; i++) parts.push({ x, y, vx: rand(-spread, spread), vy: -rand(up * 0.4, up), life, max: life, col, size: rand(size * 0.6, size), g: grav });
+  }
+  function confetti() {
+    const cols = [C.primrose, C.blue, C.chalk];
+    for (let i = 0; i < 70; i++) parts.push({ x: rand(0, LW), y: rand(-40, 0), vx: rand(-40, 40), vy: rand(40, 140), life: 2.2, max: 2.2, col: cols[i % 3], size: rand(2, 4), g: 60, flake: true, spin: rand(0, 6) });
+  }
+
+  // ---------- flow ----------
+  function start() {
+    reset();
+    state = 'run';
+    startPanel.hidden = true; overPanel.hidden = true;
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    stage.focus({ preventScroll: true });
+  }
+  function die(kind) {
+    if (state !== 'run') return;
+    state = 'dying'; deathT = 0; deathKind = kind;
+    if (kind === 'bog') { puff(PX, GY + 30, 22, C.mudShine, 90, 240, 0.8, 4, 600); }
+    else { shake = reduceMotion ? 0 : 10; player.vy = -520; player.dx = -140; puff(PX + 12, player.y - 30, 16, C.chalk, 120, 160, 0.5, 3, 300); }
+  }
+  function showOver() {
+    state = 'over'; canRestart = false;
+    const metres = Math.floor(cam / UPM);
+    const isBest = metres > best;
+    if (isBest) { best = metres; saveBest(best); }
+    const info = deathKind === 'bog'
+      ? { eye: 'Waterlogged pitch', title: 'Held up!', reason: 'Bogged down in the mud.' }
+      : { eye: 'Big hit', title: 'Tackled!', reason: TYPES[deathKind].reason };
+    document.getElementById('overEyebrow').textContent = info.eye;
+    document.getElementById('overTitle').textContent = info.title;
+    document.getElementById('overReason').textContent = info.reason;
+    document.getElementById('statDist').textContent = metres + ' m';
+    document.getElementById('statTries').textContent = tries;
+    document.getElementById('statBest').textContent = best + ' m';
+    document.getElementById('newBest').hidden = !(isBest && metres > 0);
+    overPanel.hidden = false;
+    restartBtn.focus({ preventScroll: true });
+    setTimeout(() => { canRestart = true; }, 450);
+  }
+
+  // ---------- input ----------
+  function press() {
+    if (state === 'ready') start();
+    else if (state === 'run') { player.buffer = BUFFER; player.holding = true; }
+    else if (state === 'over' && canRestart) start();
+  }
+  function release() { if (player) player.holding = false; }
+
+  const JUMP_KEYS = new Set(['Space', 'ArrowUp', 'KeyW']);
+  window.addEventListener('keydown', e => {
+    if (!JUMP_KEYS.has(e.code)) return;
+    // Let a focused button handle its own Space/Enter (avoids a double restart).
+    if (e.target && e.target.closest && e.target.closest('button') && state !== 'run') return;
+    e.preventDefault();
+    if (!e.repeat) press();
+  });
+  window.addEventListener('keyup', e => { if (JUMP_KEYS.has(e.code)) release(); });
+  stage.addEventListener('pointerdown', e => { e.preventDefault(); press(); });
+  window.addEventListener('pointerup', release);
+  window.addEventListener('pointercancel', release);
+  window.addEventListener('blur', release);
+  startBtn.addEventListener('click', start);
+  restartBtn.addEventListener('click', start);
+
+  // ---------- update ----------
+  function step(dt) {
+    clock += dt;
+    tryFlash = Math.max(0, tryFlash - dt);
+    celebrate = Math.max(0, celebrate - dt);
+    shake = Math.max(0, shake - dt * 30);
+
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i];
+      p.life -= dt; if (p.life <= 0) { parts.splice(i, 1); continue; }
+      p.vy += p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt;
+      if (state === 'run' && !p.flake) p.x -= speed * dt * 0.6;
+    }
+
+    if (state === 'dying') {
+      deathT += dt;
+      const p = player;
+      if (deathKind === 'bog') { p.y += 60 * dt; }
+      else { p.vy += G * dt; p.y = Math.min(GY, p.y + p.vy * dt); p.dx *= 0.98; p.rot = Math.max(-1.45, p.rot - dt * 5); if (p.y >= GY) p.vy = 0; }
+      if (deathT > 0.85) showOver();
+      return;
+    }
+    if (state !== 'run') { player.phase += dt * 3; return; }
+
+    speed = Math.min(MAX_SPEED, START_SPEED + cam * 0.018);
+    const prevCam = cam;
+    cam += speed * dt;
+    if (Math.floor(cam / TRY_EVERY) > Math.floor(prevCam / TRY_EVERY)) {
+      tries++; tryFlash = 1.4; celebrate = 2.2; if (!reduceMotion) confetti();
+    }
+
+    const p = player, wx = cam + PX, supported = !overGap(wx);
+    p.buffer -= dt;
+    if (p.onGround && !supported) { p.onGround = false; }
+    if (p.onGround) p.coyote = COYOTE; else p.coyote -= dt;
+    if (p.buffer > 0 && (p.onGround || p.coyote > 0) && p.y <= GY + 6) {
+      p.vy = -JV; p.onGround = false; p.coyote = 0; p.buffer = 0;
+      puff(PX - 4, GY, 5, 'rgba(210,230,200,0.8)', 50, 60, 0.35, 3, 200);
+    }
+    if (!p.holding && p.vy < -CUT) p.vy = -CUT;
+    if (!p.onGround) {
+      const prevY = p.y;
+      p.vy += G * dt; p.y += p.vy * dt;
+      if (p.y >= GY && prevY <= GY + 1 && supported) { p.y = GY; p.vy = 0; p.onGround = true; puff(PX, GY, 4, 'rgba(210,230,200,0.7)', 60, 40, 0.3, 3, 200); }
+    }
+    p.phase += dt * (8 + speed / 45);
+
+    if (p.onGround) {
+      dustT -= dt;
+      if (dustT <= 0) { dustT = 0.07; puff(PX - 8, GY - 1, 1, 'rgba(200,225,190,0.55)', 20, 30, 0.35, 2.5, 100); }
+    }
+    if (p.y > GY + 26) { die('bog'); return; }
+
+    // Collision: Wolfie's body box vs each obstacle's inset box
+    const bx = PX - 10, bw = 22, by = p.y - 62, bh = 60;
+    for (const o of obs) {
+      const t = TYPES[o.type], ox = o.x - cam + t.inset, ow = o.w - t.inset * 2, oh = o.h - t.inset;
+      if (bx < ox + ow && bx + bw > ox && by < GY && by + bh > GY - oh) { die(o.type); return; }
+    }
+
+    while (nextSpawn < cam + LW + 120) spawn();
+    obs = obs.filter(o => o.x + o.w > cam - 60);
+    gaps = gaps.filter(g => g.x + g.w > cam - 60);
+  }
+
+  // ---------- drawing: backdrop ----------
+  function drawSky() {
+    const g = ctx.createLinearGradient(0, 0, 0, GY);
+    g.addColorStop(0, C.skyTop); g.addColorStop(1, C.skyLow);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, LW, GY);
+    for (let i = 0; i < 40; i++) {
+      const x = ((hash(i) * 1400 - cam * 0.02) % 1400 + 1400) % 1400, y = hash(i + 50) * 90;
+      if (x > LW) continue;
+      ctx.fillStyle = `rgba(255,255,255,${0.25 + hash(i + 9) * 0.5})`;
+      ctx.fillRect(x, y, 1.4, 1.4);
+    }
+  }
+  function drawFloodlights() {
+    const par = 0.12, tile = 560, off = cam * par;
+    for (let i = Math.floor(off / tile) - 1; i <= Math.floor((off + LW) / tile) + 1; i++) {
+      const x = i * tile - off + 280;
+      const glow = ctx.createRadialGradient(x, 36, 4, x, 36, 150);
+      glow.addColorStop(0, 'rgba(255,250,215,0.42)'); glow.addColorStop(1, 'rgba(255,250,215,0)');
+      ctx.fillStyle = glow; ctx.fillRect(x - 150, 0, 300, 190);
+      ctx.fillStyle = '#0b1328'; ctx.fillRect(x - 3, 44, 6, 110);
+      ctx.fillStyle = '#1b2748'; ctx.fillRect(x - 24, 24, 48, 22);
+      for (let r = 0; r < 2; r++) for (let c = 0; c < 5; c++) { ctx.fillStyle = '#fffbe0'; ctx.fillRect(x - 21 + c * 9, 27 + r * 9, 7, 7); }
+    }
+  }
+  function drawStand() {
+    const par = 0.3, tile = 380, off = cam * par, top = 118;
+    const jump = celebrate > 0 ? Math.min(1, celebrate) : 0;
+    ctx.fillStyle = C.standDark; ctx.fillRect(0, top, LW, GY - top);
+    for (let i = Math.floor(off / tile) - 1; i <= Math.floor((off + LW) / tile); i++) {
+      const x0 = i * tile - off;
+      ctx.fillStyle = C.standRoof;
+      ctx.beginPath(); ctx.moveTo(x0, top - 16); ctx.lineTo(x0 + tile, top - 16); ctx.lineTo(x0 + tile, top - 4); ctx.lineTo(x0, top - 4); ctx.fill();
+      ctx.fillStyle = '#0a1226'; ctx.fillRect(x0 + tile - 4, top - 16, 4, GY - top + 16);
+      for (let row = 0; row < 6; row++) {
+        for (let c = 0; c < 40; c++) {
+          const h = hash(i * 997 + row * 53 + c);
+          if (h < 0.12) continue;
+          const cx = x0 + 6 + c * 9.2 + (row % 2) * 4.6, cy = top + 6 + row * 13;
+          const bob = jump ? Math.abs(Math.sin(clock * 10 + c * 1.7 + row)) * 4 * jump : 0;
+          ctx.fillStyle = h < 0.45 ? '#2a5bb4' : h < 0.75 ? '#e2cf62' : h < 0.88 ? '#cfd6e6' : '#36425f';
+          ctx.fillRect(cx - 3, cy - bob + 3, 6, 6);
+          ctx.fillStyle = '#c99b78';
+          ctx.beginPath(); ctx.arc(cx, cy - bob, 2.4, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+    }
+  }
+  const BOARDS = ['COME ON THE WIRE', 'PRIMROSE & BLUE', 'WOLFIE RUN', 'UP THE WIRE'];
+  function drawHoardings() {
+    const par = 0.85, tile = 210, off = cam * par, y = GY - 20;
+    ctx.font = '600 12px ' + getComputedStyle(document.documentElement).getPropertyValue('--body');
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (let i = Math.floor(off / tile) - 1; i <= Math.floor((off + LW) / tile); i++) {
+      const x = i * tile - off, alt = ((i % 2) + 2) % 2;
+      ctx.fillStyle = alt ? C.blue : C.primrose; ctx.fillRect(x, y, tile - 2, 20);
+      ctx.fillStyle = alt ? C.primrose : C.blueDark;
+      ctx.fillText(BOARDS[((i % 4) + 4) % 4], x + tile / 2, y + 11);
+    }
+  }
+  function drawPosts() {
+    const first = Math.floor(cam / TRY_EVERY), last = Math.floor((cam + LW + 60) / TRY_EVERY);
+    for (let k = first; k <= last; k++) {
+      const sx = k * TRY_EVERY - cam;
+      if (sx < -60 || sx > LW + 60) continue;
+      ctx.fillStyle = C.chalk;
+      ctx.fillRect(sx - 16, GY - 150, 4, 150);
+      ctx.fillRect(sx + 12, GY - 150, 4, 150);
+      ctx.fillRect(sx - 16, GY - 56, 32, 4);
+      ctx.fillStyle = C.blue; ctx.fillRect(sx - 19, GY - 30, 10, 30); ctx.fillRect(sx + 9, GY - 30, 10, 30);
+      ctx.fillStyle = C.primrose; ctx.fillRect(sx - 19, GY - 22, 10, 6); ctx.fillRect(sx + 9, GY - 22, 10, 6);
+    }
+  }
+
+  // ---------- drawing: pitch & gaps ----------
+  function drawPitch() {
+    const band = 26;
+    ctx.fillStyle = C.turf; ctx.fillRect(0, GY, LW, band);
+    // mown stripes every 5 m
+    const s0 = Math.floor(cam / 100);
+    for (let k = s0; k <= s0 + Math.ceil(LW / 100) + 1; k++) {
+      if (k % 2) continue;
+      ctx.fillStyle = C.turfLight; ctx.fillRect(k * 100 - cam, GY, 100, band);
+    }
+    // chalk lines every 10 m, try lines every 100 m, with the painted numbers 10-50-10
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const bodyFont = getComputedStyle(document.documentElement).getPropertyValue('--body');
+    const l0 = Math.floor(cam / 200);
+    for (let k = l0; k <= l0 + Math.ceil(LW / 200) + 1; k++) {
+      const x = k * 200 - cam, n = ((k % 10) + 10) % 10, isTry = n === 0;
+      ctx.strokeStyle = 'rgba(244,246,239,0.85)'; ctx.lineWidth = isTry ? 4 : 2;
+      ctx.beginPath(); ctx.moveTo(x + 7, GY); ctx.lineTo(x - 7, GY + band); ctx.stroke();
+      if (!isTry) {
+        ctx.save(); ctx.translate(x + 22, GY + band / 2 + 1); ctx.transform(1, 0, -0.45, 0.7, 0, 0);
+        ctx.font = '700 17px ' + bodyFont; ctx.fillStyle = 'rgba(244,246,239,0.8)';
+        ctx.fillText(String((n <= 5 ? n : 10 - n) * 10), 0, 0);
+        ctx.restore();
+      }
+    }
+    ctx.fillStyle = C.turfEdge; ctx.fillRect(0, GY, LW, 2);
+    const sg = ctx.createLinearGradient(0, GY + band, 0, H);
+    sg.addColorStop(0, C.soil); sg.addColorStop(1, C.soilDark);
+    ctx.fillStyle = sg; ctx.fillRect(0, GY + band, LW, H - GY - band);
+    ctx.fillStyle = '#245f2e'; ctx.fillRect(0, GY + band, LW, 3);
+  }
+  function drawGaps() {
+    for (const g of gaps) {
+      const x = g.x - cam;
+      if (x > LW || x + g.w < 0) continue;
+      ctx.fillStyle = C.soilDark; ctx.fillRect(x, GY, g.w, H - GY);
+      const mg = ctx.createLinearGradient(0, GY + 30, 0, H);
+      mg.addColorStop(0, C.mud); mg.addColorStop(1, '#2a2013');
+      ctx.fillStyle = mg; ctx.fillRect(x, GY + 30, g.w, H - GY - 30);
+      ctx.strokeStyle = C.mudShine; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let i = 0; i <= g.w; i += 4) ctx.lineTo(x + i, GY + 31 + Math.sin(clock * 4 + i * 0.3) * 1.2);
+      ctx.stroke();
+      ctx.fillStyle = C.turfEdge; ctx.fillRect(x - 2, GY, 3, 6); ctx.fillRect(x + g.w - 1, GY, 3, 6);
+    }
+  }
+
+  // ---------- drawing: obstacles ----------
+  function drawBag(x, w, h) {
+    shadow(x + w / 2, w * 0.7);
+    ctx.fillStyle = '#262c3a'; rr(x, GY - h, w, h, 9); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.08)'; rr(x + 3, GY - h + 4, 6, h - 10, 3); ctx.fill();
+    ctx.fillStyle = C.rival; ctx.fillRect(x, GY - h * 0.62, w, 6); ctx.fillRect(x, GY - h * 0.3, w, 6);
+    ctx.strokeStyle = '#cfd5e2'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(x + w / 2, GY - h + 2, 6, Math.PI, 0); ctx.stroke();
+  }
+  function drawObstacle(o) {
+    const x = o.x - cam, w = o.w, h = o.h;
+    if (x > LW + 10 || x + w < -10) return;
+    switch (o.type) {
+      case 'bag': drawBag(x, w, h); break;
+      case 'bags2': drawBag(x, 24, h); drawBag(x + 28, 24, h - 4); break;
+      case 'shield': {
+        shadow(x + w / 2, w * 0.7);
+        ctx.save(); ctx.translate(x + w / 2, GY); ctx.rotate(-0.08);
+        ctx.fillStyle = '#e57a2b'; rr(-w / 2, -h, w, h, 6); ctx.fill();
+        ctx.fillStyle = '#1b1f29'; ctx.fillRect(-w / 2 + 3, -h * 0.62, w - 6, 5);
+        ctx.fillStyle = 'rgba(255,255,255,0.18)'; ctx.fillRect(-w / 2 + 3, -h + 4, 3, h - 10);
+        ctx.restore(); break;
+      }
+      case 'tee': {
+        shadow(x + w / 2, w * 0.6);
+        ctx.fillStyle = '#f08a24';
+        ctx.beginPath(); ctx.moveTo(x + 3, GY); ctx.lineTo(x + w - 3, GY); ctx.lineTo(x + w / 2 + 5, GY - 8); ctx.lineTo(x + w / 2 - 5, GY - 8); ctx.fill();
+        ctx.save(); ctx.translate(x + w / 2, GY - 16); ctx.rotate(0.35);
+        ellipse(0, 0, 8, 12, 0, C.chalk);
+        ctx.fillStyle = C.blue; ctx.beginPath(); ctx.ellipse(0, 0, 8, 12, 0, -0.6, 0.6); ctx.lineTo(0, 0); ctx.fill();
+        ctx.strokeStyle = '#9aa3b3'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, -12); ctx.lineTo(0, 12); ctx.stroke();
+        ctx.restore(); break;
+      }
+      case 'cones': {
+        for (let i = 0; i < 3; i++) {
+          const cx = x + 10 + i * 22;
+          shadow(cx, 10);
+          ctx.fillStyle = i % 2 ? C.primrose : '#f07a1f';
+          ctx.beginPath(); ctx.moveTo(cx - 11, GY); ctx.lineTo(cx + 11, GY); ctx.lineTo(cx + 4, GY - h); ctx.lineTo(cx - 4, GY - h); ctx.fill();
+          ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(cx - 9, GY - 5, 18, 2);
+        }
+        break;
+      }
+      case 'flag': {
+        shadow(x + 5, 6);
+        for (let i = 0; i < 6; i++) { ctx.fillStyle = i % 2 ? C.rival : C.chalk; ctx.fillRect(x + 3, GY - h + i * (h / 6), 4, h / 6 + 0.5); }
+        const wave = Math.sin(clock * 7 + o.seed) * 3;
+        ctx.fillStyle = C.primrose;
+        ctx.beginPath(); ctx.moveTo(x + 7, GY - h); ctx.quadraticCurveTo(x + 13, GY - h + wave, x + 20, GY - h + 2 + wave); ctx.lineTo(x + 20, GY - h + 14 + wave); ctx.quadraticCurveTo(x + 13, GY - h + 12 + wave, x + 7, GY - h + 13); ctx.fill();
+        break;
+      }
+      case 'defender': drawDefender(x, w, h, o.seed); break;
+    }
+  }
+  // A crouched opposition defender in generic red-and-white hoops, set to tackle (faces left)
+  function drawDefender(x, w, h, seed) {
+    const sway = Math.sin(clock * 6 + seed) * 1.5;
+    shadow(x + w / 2, w * 0.6);
+    ctx.save(); ctx.translate(x, GY);
+    // legs, bent and ready
+    limb(22, -22, 0.55, 12, 6, '#1b1f29'); limb(28, -14, -0.25, 12, 5, C.rival);
+    limb(14, -22, -0.5, 12, 6, '#1b1f29'); limb(8, -12, 0.2, 12, 5, C.rival);
+    ellipse(7, -1, 5, 2.5, 0, '#111'); ellipse(30, -1, 5, 2.5, 0, '#111');
+    // torso in hoops
+    ctx.save(); ctx.translate(18, -32 + sway); ctx.rotate(-0.55);
+    ctx.beginPath(); ctx.ellipse(0, 0, 14, 10, 0, 0, Math.PI * 2); ctx.clip();
+    for (let i = -14; i < 14; i += 5) { ctx.fillStyle = ((i + 14) / 5) % 2 < 1 ? C.rival : C.chalk; ctx.fillRect(i, -12, 5, 24); }
+    ctx.restore();
+    // arms reaching for the tackle
+    limb(9, -38 + sway, -1.9, 12, 5, C.rival); limb(10, -34 + sway, -2.2, 12, 5, C.skin);
+    // head with scrum cap
+    ellipse(4, -44 + sway, 7, 7, 0, C.skin);
+    ctx.fillStyle = '#1b1f29'; ctx.beginPath(); ctx.arc(5, -45 + sway, 7.4, Math.PI * 1.05, Math.PI * 2.1); ctx.fill();
+    ctx.fillStyle = '#111'; ctx.fillRect(-1, -44 + sway, 2, 2);
+    ctx.restore();
+  }
+
+  // ---------- drawing: Wolfie ----------
+  function drawWolfie(x, y, mode) {
+    const p = player, ph = p.phase;
+    ctx.save();
+    ctx.translate(x + p.dx * (state === 'dying' ? deathT : 0), y);
+    if (state === 'dying' && deathKind !== 'bog') ctx.rotate(p.rot);
+    const bob = mode === 'run' ? -Math.abs(Math.sin(ph)) * 2.5 : mode === 'idle' ? Math.sin(ph) * 0.8 : 0;
+    ctx.translate(0, bob);
+
+    const legs = i => {
+      const off = i ? Math.PI : 0;
+      if (mode === 'run') { const s = Math.sin(ph + off); const t = s * 0.8; return [t, t - (0.15 + Math.max(0, Math.cos(ph + off)) * 1.2)]; }
+      if (mode === 'air') return i ? [-0.5, -1.3] : [1.0, 0.15];
+      return i ? [-0.08, -0.1] : [0.08, 0.05];
+    };
+    const drawLeg = (i, col) => {
+      const [a, b] = legs(i), hx = i ? -4 : 4;
+      const [kx, ky] = limb(hx, -22, a, 11, 7, col);
+      const [fx, fy] = limb(kx, ky, b, 11, 6, col);
+      ellipse(fx + 3, fy + 1, 5.5, 3, 0, C.ink);
+    };
+    const armA = mode === 'run' ? -Math.sin(ph) * 0.9 : mode === 'air' ? -2.4 : 0.15;
+    const drawArm = (sign, sleeve, fur) => {
+      const [ex, ey] = limb(1, -44, armA * sign, 10, 6, sleeve);
+      const [hx, hy] = limb(ex, ey, armA * sign + (mode === 'air' ? 0.3 : 1.1), 9, 5, fur);
+      ellipse(hx, hy, 3.4, 3.4, 0, fur);
+    };
+
+    // back arm, back leg
+    drawArm(-1, C.blueDark, C.furDark);
+    drawLeg(1, C.furDark);
+    // tail
+    const wag = Math.sin(ph * 0.9) * 0.25;
+    ctx.save(); ctx.translate(-10, -32); ctx.rotate(-0.55 + wag);
+    ellipse(-12, 0, 13, 6.5, 0, C.fur); ellipse(-22, 0, 5, 4.5, 0, C.furLight);
+    ctx.restore();
+    // shorts
+    ctx.fillStyle = C.chalk; rr(-11, -29, 22, 9, 3); ctx.fill();
+    // front leg
+    drawLeg(0, C.fur);
+    // torso: blue jersey with a primrose V
+    ctx.fillStyle = C.blue; rr(-12, -49, 24, 23, 6); ctx.fill();
+    ctx.strokeStyle = C.primrose; ctx.lineWidth = 4; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(-10, -48); ctx.lineTo(0, -38); ctx.lineTo(10, -48); ctx.stroke();
+    ctx.fillStyle = C.primrose; ctx.fillRect(-12, -30, 24, 3);
+    // head
+    ctx.save(); ctx.translate(7, -61);
+    ctx.fillStyle = C.fur;
+    ctx.beginPath(); ctx.moveTo(-9, -6); ctx.lineTo(-7, -22); ctx.lineTo(1, -10); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(-1, -10); ctx.lineTo(5, -23); ctx.lineTo(9, -8); ctx.fill();
+    ctx.fillStyle = '#d99aa6';
+    ctx.beginPath(); ctx.moveTo(-6.5, -9); ctx.lineTo(-6, -17); ctx.lineTo(-1.5, -10); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(2, -10); ctx.lineTo(5, -18); ctx.lineTo(7, -9); ctx.fill();
+    ellipse(0, 0, 12.5, 12, 0, C.fur);
+    ctx.fillStyle = C.fur; ctx.beginPath(); ctx.moveTo(-12, 4); ctx.lineTo(-17, 9); ctx.lineTo(-9, 9); ctx.fill();
+    ellipse(6, 4, 9, 7, 0, C.furLight);
+    ellipse(14, 4, 9, 5.5, 0.08, C.furLight);
+    ellipse(22, 2.5, 3.2, 2.8, 0, C.ink);
+    // eye and a determined brow
+    ellipse(6, -3, 3.8, 4, 0, '#fff');
+    ellipse(7.4, -2.6, 2.1, 2.4, 0, C.ink);
+    ellipse(8, -3.5, 0.8, 0.8, 0, '#fff');
+    ctx.strokeStyle = C.furDark; ctx.lineWidth = 2; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(2, -8); ctx.lineTo(10, -6.5); ctx.stroke();
+    // grin
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(12, 7); ctx.quadraticCurveTo(17, 10, 21, 6.5); ctx.stroke();
+    if (mode === 'run') { ellipse(16.5, 9.5, 2.2, 1.6, 0, '#e8708a'); }
+    ctx.restore();
+    // front arm
+    drawArm(1, C.blue, C.fur);
+    ctx.restore();
+  }
+
+  // ---------- drawing: particles & HUD ----------
+  function drawParts() {
+    for (const p of parts) {
+      ctx.globalAlpha = Math.max(0, p.life / p.max);
+      ctx.fillStyle = p.col;
+      if (p.flake) { ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.spin + p.life * 6); ctx.fillRect(-p.size, -p.size / 2, p.size * 2, p.size); ctx.restore(); }
+      else { ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    ctx.globalAlpha = 1;
+  }
+  function drawHUD() {
+    const disp = getComputedStyle(document.documentElement).getPropertyValue('--display');
+    const bodyF = getComputedStyle(document.documentElement).getPropertyValue('--body');
+    const metres = Math.floor(cam / UPM);
+    ctx.textBaseline = 'alphabetic';
+    // scoreboard plate
+    ctx.fillStyle = 'rgba(6,12,28,0.72)'; rr(12, 12, 150, 48, 6); ctx.fill();
+    ctx.strokeStyle = 'rgba(242,223,107,0.6)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.textAlign = 'left';
+    ctx.font = '600 11px ' + bodyF; ctx.fillStyle = '#a9b8dc';
+    ctx.fillText('DISTANCE', 22, 27);
+    ctx.font = '24px ' + disp; ctx.fillStyle = C.primrose;
+    ctx.fillText(metres + ' m', 22, 52);
+    ctx.font = '600 11px ' + bodyF; ctx.fillStyle = '#a9b8dc'; ctx.textAlign = 'right';
+    ctx.fillText('TRIES', 152, 27);
+    ctx.font = '20px ' + disp; ctx.fillStyle = C.chalk;
+    ctx.fillText(String(tries), 152, 52);
+
+    ctx.textAlign = 'right';
+    ctx.font = '600 13px ' + bodyF; ctx.fillStyle = '#a9b8dc';
+    ctx.fillText('BEST ' + best + ' m', LW - 14, 26);
+    ctx.fillText(Math.round(speed / UPM * 3.6) + ' km/h', LW - 14, 44);
+
+    if (tryFlash > 0) {
+      const t = 1.4 - tryFlash, s = Math.min(1, t * 6) * (1 + Math.max(0, 0.15 - t) * 2);
+      ctx.save(); ctx.translate(LW / 2, 110); ctx.scale(s, s);
+      ctx.globalAlpha = Math.min(1, tryFlash * 2);
+      ctx.textAlign = 'center';
+      ctx.font = '58px ' + disp;
+      ctx.fillStyle = C.blue; ctx.fillText('TRY!', 4, 4);
+      ctx.fillStyle = C.primrose; ctx.fillText('TRY!', 0, 0);
+      ctx.font = '700 16px ' + bodyF; ctx.fillStyle = C.chalk;
+      ctx.fillText('Over the line at ' + tries * 100 + ' m', 0, 26);
+      ctx.restore();
+    }
+  }
+
+  function render() {
+    ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
+    if (shake > 0) ctx.translate(rand(-shake, shake) * 0.4, rand(-shake, shake) * 0.4);
+    drawSky(); drawFloodlights(); drawStand(); drawHoardings(); drawPosts(); drawPitch(); drawGaps();
+    for (const o of obs) drawObstacle(o);
+    const p = player;
+    const mode = state === 'ready' ? 'idle' : state === 'dying' ? 'air' : p.onGround ? 'run' : 'air';
+    if (state === 'dying' && deathKind === 'bog') {
+      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, LW, GY + 31); ctx.clip();
+      drawWolfie(PX, p.y, mode); ctx.restore();
+    } else drawWolfie(PX, p.y, mode);
+    drawParts();
+    if (state !== 'ready') drawHUD();
+  }
+
+  // ---------- loop ----------
+  let last = performance.now(), acc = 0;
+  const DT = 1 / 120;
+  function frame(now) {
+    acc += Math.min(0.05, (now - last) / 1000); last = now;
+    while (acc >= DT) { step(DT); acc -= DT; }
+    render();
+    requestAnimationFrame(frame);
+  }
+
+  resize();
+  reset();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+  requestAnimationFrame(frame);
+})();
+</script>
