@@ -9,6 +9,7 @@ An unofficial rugby league endless runner. Wolfie auto-runs down a floodlit pitc
 - **Tries**: every 100 m, +40.
 - **Rain**: at 500 m the night match turns into a muddy, rain-soaked one with more waterlogged patches.
 - **Sound**: short synthesised effects (no audio files, no background loops); `M` or the speaker button mutes.
+- **Rules**: a How to play pop-up (Rules button or start screen) explains controls, scoring and power-ups; it pauses a run while open.
 - **Share score**: copies a message with the link (or opens the phone's share sheet).
 
 ## Hosting on Cloudflare Pages

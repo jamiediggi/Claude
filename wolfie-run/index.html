@@ -267,6 +267,47 @@ kbd {
 .credit a { color: var(--chalk); text-decoration: none; border-bottom: 1px solid rgba(242, 223, 107, 0.6); }
 .credit a:hover { color: var(--primrose); }
 .credit a:focus-visible { outline: 2px solid var(--primrose); outline-offset: 2px; }
+.overlay.top { z-index: 6; }
+.panel.rules {
+  width: min(640px, 100%);
+  text-align: left;
+  align-items: stretch;
+  gap: 14px;
+}
+.rules-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.rules-head h2 { text-align: left; }
+.close-btn {
+  flex: none;
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  font-size: 22px; line-height: 1;
+  color: var(--chalk);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(169, 184, 220, 0.35);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.close-btn:hover { border-color: var(--primrose); }
+.close-btn:focus-visible { outline: 3px solid var(--primrose); outline-offset: 2px; }
+.rules-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px; }
+.rules-grid section { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.rules-grid section.span { grid-column: 1 / -1; }
+.rules h3 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primrose);
+}
+.rules p, .rules li { font-size: 17px; line-height: 1.3; max-width: none; }
+.rules ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+.points { width: 100%; border-collapse: collapse; font-size: 17px; }
+.points td { padding: 5px 0; border-bottom: 1px solid rgba(169, 184, 220, 0.2); }
+.points td:last-child { text-align: right; font-family: var(--display); color: var(--primrose); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
+.rules .note { color: var(--muted); font-size: 15px; }
+.rules .actions { justify-content: flex-start; }
+@media (max-width: 560px) { .rules-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 380px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .btn, .icon-btn .wave { transition: none; } }
 </style>
@@ -276,6 +317,12 @@ kbd {
     <h1 class="brand">Wolfie <span>Run</span></h1>
     <div class="masthead-right">
       <p class="tagline">Unofficial fan game &middot; Primrose &amp; Blue</p>
+      <button class="icon-btn" id="rulesBtn" type="button" title="How to play" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17.2v.1"/>
+        </svg>
+        <span>Rules</span>
+      </button>
       <button class="icon-btn" id="muteBtn" type="button" aria-pressed="false" title="Mute or unmute (M)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>
@@ -291,7 +338,7 @@ kbd {
     <canvas id="game" aria-hidden="true"></canvas>
   </div>
 
-  <p class="footnote" id="footnote"><kbd>Space</kbd> or tap to jump &middot; hold for a higher leap &middot; <kbd>M</kbd> mutes <span class="rotate-hint">&middot; turn your phone sideways for a bigger pitch</span></p>
+  <p class="footnote" id="footnote"><kbd>Space</kbd> or tap to jump &middot; hold for a higher leap &middot; <kbd>M</kbd> mutes &middot; Rules explains the scoring <span class="rotate-hint">&middot; turn your phone sideways for a bigger pitch</span></p>
 
   <div class="overlay" id="startPanel">
     <div class="panel" role="dialog" aria-labelledby="startTitle">
@@ -305,7 +352,10 @@ kbd {
         <li><span class="dot dot-set"></span><span><b>Set of six</b> clear six, +60</span></li>
       </ul>
       <p class="keys"><kbd>Space</kbd> or tap to jump. Hold for a higher leap.</p>
-      <button class="btn" id="startBtn" type="button">Kick off</button>
+      <div class="actions">
+        <button class="btn" id="startBtn" type="button">Kick off</button>
+        <button class="btn secondary" id="howBtn" type="button">How to play</button>
+      </div>
       <p class="credit">Built by <a href="https://jamieclarke.online" target="_blank" rel="noopener">Jamie Clarke</a></p>
     </div>
   </div>
@@ -334,6 +384,64 @@ kbd {
     </div>
   </div>
 </div>
+
+  <div class="overlay top" id="rulesPanel" hidden>
+    <div class="panel rules" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+      <div class="rules-head">
+        <div>
+          <p class="eyebrow">Match rules</p>
+          <h2 id="rulesTitle">How to play</h2>
+        </div>
+        <button class="close-btn" id="rulesClose" type="button" aria-label="Close rules">&times;</button>
+      </div>
+      <div class="rules-grid">
+        <section>
+          <h3>Controls</h3>
+          <ul>
+            <li><kbd>Space</kbd>, <kbd>&uarr;</kbd> or <kbd>W</kbd>, or tap the pitch, to jump.</li>
+            <li>Hold for a higher leap; tap for a short hop.</li>
+            <li><kbd>M</kbd> mutes the sound. <kbd>Esc</kbd> closes this page.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Scoring</h3>
+          <table class="points">
+            <tbody>
+              <tr><td>Every metre run</td><td>1</td></tr>
+              <tr><td>Rugby ball</td><td>+10</td></tr>
+              <tr><td>Try (every 100&nbsp;m)</td><td>+40</td></tr>
+              <tr><td>Set of six</td><td>+60</td></tr>
+              <tr><td>Obstacle smashed with the Golden Boot</td><td>+5</td></tr>
+            </tbody>
+          </table>
+          <p class="note">Your best score is saved on this device.</p>
+        </section>
+        <section>
+          <h3>Power-ups</h3>
+          <ul>
+            <li><b>Golden Boot:</b> six seconds of invincibility. Wolfie smashes through obstacles and runs straight over the mud. He flickers just before it runs out.</li>
+            <li><b>Fend-off:</b> shrugs off the next hit. You can hold two at once.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Set of six</h3>
+          <p>Every obstacle or mud patch Wolfie clears fills a pip under the scoreboard. Six in a row completes the set for +60, then the count starts again. An obstacle brushed aside with a fend-off doesn&rsquo;t count, but doesn&rsquo;t reset the set either.</p>
+        </section>
+        <section class="span">
+          <h3>It gets harder</h3>
+          <ul>
+            <li>Speed builds from about 56&nbsp;km/h to a top speed of 144&nbsp;km/h at around 1,360&nbsp;m.</li>
+            <li>New hazards join as you go: training cones at 30&nbsp;m, waterlogged patches at 70&nbsp;m, corner flags at 75&nbsp;m, defenders at 125&nbsp;m and double tackle bags at 350&nbsp;m.</li>
+            <li>At 500&nbsp;m the rain comes in: a heavier, muddier pitch with more waterlogged patches.</li>
+            <li>Hit an obstacle and you&rsquo;re <b>Tackled</b>. Fall in the mud and you&rsquo;re <b>Held up</b>. Either way it&rsquo;s full time.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="actions">
+        <button class="btn" id="rulesBack" type="button">Back to the game</button>
+      </div>
+    </div>
+  </div>
 
 <script>
 (() => {
@@ -365,6 +473,7 @@ kbd {
   const startPanel = $('startPanel'), overPanel = $('overPanel');
   const startBtn = $('startBtn'), restartBtn = $('restartBtn'), shareBtn = $('shareBtn');
   const muteBtn = $('muteBtn'), muteLabel = $('muteLabel');
+  const rulesPanel = $('rulesPanel'), rulesBtn = $('rulesBtn'), howBtn = $('howBtn');
   const shareStatus = $('shareStatus'), shareText = $('shareText');
   const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name);
   let FONT_DISPLAY = cssVar('--display'), FONT_BODY = cssVar('--body');
@@ -650,6 +759,28 @@ kbd {
     }
   }
 
+  // ---------- rules page (pauses a run while open) ----------
+  let paused = false, rulesReturn = null;
+  function openRules() {
+    if (!rulesPanel.hidden) return;
+    rulesReturn = document.activeElement;
+    if (state === 'run') { paused = true; release(); player.buffer = 0; }
+    rulesPanel.hidden = false;
+    $('rulesClose').focus({ preventScroll: true });
+  }
+  function closeRules() {
+    if (rulesPanel.hidden) return;
+    rulesPanel.hidden = true;
+    paused = false;
+    if (state === 'run') stage.focus({ preventScroll: true });
+    else if (rulesReturn && rulesReturn.focus) rulesReturn.focus({ preventScroll: true });
+  }
+  rulesBtn.addEventListener('click', openRules);
+  howBtn.addEventListener('click', openRules);
+  $('rulesClose').addEventListener('click', closeRules);
+  $('rulesBack').addEventListener('click', closeRules);
+  rulesPanel.addEventListener('pointerdown', e => { if (e.target === rulesPanel) closeRules(); });
+
   // ---------- input ----------
   function press() {
     sfx.init();
@@ -662,6 +793,7 @@ kbd {
   const JUMP_KEYS = new Set(['Space', 'ArrowUp', 'KeyW']);
   window.addEventListener('keydown', e => {
     if (e.code === 'KeyM' && !e.repeat) { toggleMute(); return; }
+    if (!rulesPanel.hidden) { if (e.code === 'Escape') closeRules(); return; }
     if (!JUMP_KEYS.has(e.code)) return;
     // Let focused controls handle their own Space/Enter (avoids a double restart).
     if (e.target && e.target.closest && e.target.closest('button, a, textarea') && state !== 'run') return;
@@ -1275,6 +1407,7 @@ kbd {
   const DT = 1 / 120;
   function frame(now) {
     acc += Math.min(0.05, (now - last) / 1000); last = now;
+    if (paused) acc = 0;
     while (acc >= DT) { step(DT); acc -= DT; }
     render();
     requestAnimationFrame(frame);
