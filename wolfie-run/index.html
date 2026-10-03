@@ -186,6 +186,7 @@ kbd {
 .dot-ball { background: #fbfbf5; box-shadow: inset 4px 0 0 var(--wire-blue); border-radius: 50% / 65%; width: 18px; height: 12px; }
 .dot-boot { background: #f5c542; box-shadow: 0 0 8px #f5c542; }
 .dot-fend { background: var(--wire-blue); box-shadow: inset 0 0 0 2px var(--primrose); }
+.dot-rain { background: linear-gradient(160deg, #6f84a8, #3a2818); }
 .dot-set { background: transparent; border: 2px solid var(--primrose); box-sizing: border-box; }
 .stats {
   width: 100%;
@@ -307,6 +308,15 @@ kbd {
 .points td:last-child { text-align: right; font-family: var(--display); color: var(--primrose); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
 .rules .note { color: var(--muted); font-size: 15px; }
 .rules .actions { justify-content: flex-start; }
+.panel.start { text-align: center; }
+.start-head { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.panel.start .rules-grid { text-align: left; }
+.panel.start .actions { justify-content: center; }
+.panel.start .keys, .panel.start .credit { text-align: center; }
+.rules .legend-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.legend-list li { display: flex; gap: 9px; align-items: flex-start; font-size: 17px; line-height: 1.25; }
+.legend-list .dot { margin-top: 3px; }
+.legend-list b { color: var(--chalk); }
 @media (max-width: 560px) { .rules-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 380px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .btn, .icon-btn .wave { transition: none; } }
@@ -341,20 +351,39 @@ kbd {
   <p class="footnote" id="footnote"><kbd>Space</kbd> or tap to jump &middot; hold for a higher leap &middot; <kbd>M</kbd> mutes &middot; Rules explains the scoring <span class="rotate-hint">&middot; turn your phone sideways for a bigger pitch</span></p>
 
   <div class="overlay" id="startPanel">
-    <div class="panel" role="dialog" aria-labelledby="startTitle">
-      <p class="eyebrow">Night match &middot; Kick-off</p>
-      <h2 id="startTitle">Wolfie Run</h2>
-      <p>Wolfie has broken down the wing. Hurdle the tackle bags, shields and defenders, and leap the waterlogged patches.</p>
-      <ul class="legend">
-        <li><span class="dot dot-ball"></span><span><b>Rugby balls</b> +10 points</span></li>
-        <li><span class="dot dot-boot"></span><span><b>Golden Boot</b> unstoppable</span></li>
-        <li><span class="dot dot-fend"></span><span><b>Fend-off</b> shrugs off a hit</span></li>
-        <li><span class="dot dot-set"></span><span><b>Set of six</b> clear six, +60</span></li>
-      </ul>
+    <div class="panel rules start" role="dialog" aria-labelledby="startTitle">
+      <div class="start-head">
+        <p class="eyebrow">Night match &middot; Kick-off</p>
+        <h2 id="startTitle">Wolfie Run</h2>
+        <p>Wolfie has broken down the wing. Hurdle the tackle bags, shields and defenders, and leap the waterlogged patches.</p>
+      </div>
+      <div class="rules-grid">
+        <section>
+          <h3>Scoring</h3>
+          <table class="points">
+            <tbody>
+              <tr><td>Every metre run</td><td>1</td></tr>
+              <tr><td>Rugby ball</td><td>+10</td></tr>
+              <tr><td>Try (every 100&nbsp;m)</td><td>+40</td></tr>
+              <tr><td>Set of six</td><td>+60</td></tr>
+              <tr><td>Smash with the Golden Boot</td><td>+5</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h3>Power-ups &amp; bonuses</h3>
+          <ul class="legend-list">
+            <li><span class="dot dot-boot"></span><span><b>Golden Boot:</b> six seconds of invincibility, even over the mud.</span></li>
+            <li><span class="dot dot-fend"></span><span><b>Fend-off:</b> shrugs off the next hit.</span></li>
+            <li><span class="dot dot-set"></span><span><b>Set of six:</b> clear six hazards in a row for +60.</span></li>
+            <li><span class="dot dot-rain"></span><span><b>Rain at 500&nbsp;m:</b> a muddier pitch with more waterlogged patches.</span></li>
+          </ul>
+        </section>
+      </div>
       <p class="keys"><kbd>Space</kbd> or tap to jump. Hold for a higher leap.</p>
       <div class="actions">
         <button class="btn" id="startBtn" type="button">Kick off</button>
-        <button class="btn secondary" id="howBtn" type="button">How to play</button>
+        <button class="btn secondary" id="howBtn" type="button">Full rules</button>
       </div>
       <p class="credit">Built by <a href="https://jamieclarke.online" target="_blank" rel="noopener">Jamie Clarke</a></p>
     </div>
