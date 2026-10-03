@@ -8,7 +8,7 @@ An unofficial rugby league endless runner. Wolfie auto-runs down a floodlit pitc
 - **Set of six**: clear six hazards in a row for +60.
 - **Tries**: every 100 m, +40.
 - **Rain**: at 500 m the night match turns into a muddy, rain-soaked one with more waterlogged patches.
-- **Sound**: synthesised in the browser (no audio files); `M` or the speaker button mutes.
+- **Sound**: short synthesised effects (no audio files, no background loops); `M` or the speaker button mutes.
 - **Share score**: copies a message with the link (or opens the phone's share sheet).
 
 ## Hosting on Cloudflare Pages

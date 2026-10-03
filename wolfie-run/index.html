@@ -375,7 +375,7 @@ kbd {
 
   // ---------- sound: everything is synthesised with Web Audio, no files ----------
   const sfx = (() => {
-    let ac = null, master = null, nbuf = null, crowd = null, rain = null;
+    let ac = null, master = null, nbuf = null;
     let muted = load('wolfie-run-muted', '0') === '1';
     const VOL = 0.55;
     function init() {
@@ -387,15 +387,6 @@ kbd {
       nbuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
       const d = nbuf.getChannelData(0);
       for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-      crowd = loopNoise('bandpass', 520, 0.6);
-      rain = loopNoise('highpass', 2600, 0.4);
-    }
-    function loopNoise(type, freq, q) {
-      const s = ac.createBufferSource(); s.buffer = nbuf; s.loop = true;
-      const f = ac.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
-      const g = ac.createGain(); g.gain.value = 0;
-      s.connect(f); f.connect(g); g.connect(master); s.start();
-      return g;
     }
     function env(g, t, vol, attack, dur) {
       g.gain.setValueAtTime(0.0001, t);
@@ -442,11 +433,6 @@ kbd {
       setMuted(m) {
         muted = m; save('wolfie-run-muted', m ? '1' : '0');
         if (ac) master.gain.setTargetAtTime(m ? 0 : VOL, ac.currentTime, 0.05);
-      },
-      ambience(crowdLvl, rainLvl) {
-        if (!ac) return;
-        crowd.gain.setTargetAtTime(Math.max(0.0001, crowdLvl), ac.currentTime, 0.4);
-        rain.gain.setTargetAtTime(Math.max(0.0001, rainLvl), ac.currentTime, 0.6);
       },
       suspend() { if (ac && ac.state === 'running') ac.suspend().catch(() => {}); },
       resume() { if (ac && ac.state === 'suspended') ac.resume().catch(() => {}); },
@@ -749,7 +735,6 @@ kbd {
     for (const o of obs) if (o.dead) { o.vy += G * 0.8 * dt; o.ox += (o.vx + speed * 0.4) * dt; o.oy += o.vy * dt; o.rot += o.vr * dt; }
 
     const wet = wetness();
-    sfx.ambience(state === 'run' ? 0.05 + (speed - START_SPEED) / (MAX_SPEED - START_SPEED) * 0.07 : 0.035, wet * 0.11);
 
     if (state === 'dying') {
       deathT += dt;
