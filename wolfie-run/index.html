@@ -107,8 +107,6 @@ canvas { display: block; }
   text-align: center;
   text-wrap: balance;
 }
-.rotate-hint { display: none; color: var(--primrose); }
-@media (orientation: portrait) and (max-width: 600px) { .rotate-hint { display: inline; } }
 
 kbd {
   font-family: var(--body);
@@ -318,6 +316,43 @@ kbd {
 .legend-list .dot { margin-top: 3px; }
 .legend-list b { color: var(--chalk); }
 @media (max-width: 560px) { .rules-grid { grid-template-columns: minmax(0, 1fr); } }
+.overlay.rotate { z-index: 7; background: rgba(6, 12, 28, 0.92); }
+.rotate .panel { gap: 14px; }
+.phone-turn { width: 84px; height: 84px; color: var(--primrose); }
+.phone-turn .phone { transform-origin: 42px 42px; animation: turn 2.4s ease-in-out infinite; }
+@keyframes turn {
+  0%, 20% { transform: rotate(0deg); }
+  45%, 75% { transform: rotate(-90deg); }
+  100% { transform: rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) { .phone-turn .phone { animation: none; transform: rotate(-90deg); } }
+/* Short screens (phones held sideways): compact panels so the buttons stay on screen */
+@media (max-height: 520px) {
+  .overlay { padding-block: 8px; }
+  .app { gap: 6px; padding-block: 6px; }
+  .tagline, .footnote { display: none; }
+  .brand { font-size: 20px; }
+  .icon-btn { padding: 3px 10px 3px 7px; font-size: 13px; }
+  .panel { padding: 12px 18px 12px; gap: 7px; max-height: calc(100% - 8px); }
+  .panel.start, .panel.rules { width: min(760px, 100%); }
+  .panel h2 { font-size: 28px; }
+  .eyebrow { font-size: 12px; }
+  .panel p { font-size: 15px; }
+  .start-head { gap: 4px; }
+  .start-head p:not(.eyebrow), .panel.start .keys, .panel .sub:not(#bestLine) { display: none; }
+  .rules-grid { gap: 8px 22px; }
+  .rules h3 { font-size: 12px; }
+  .points { font-size: 15px; }
+  .points td { padding: 3px 0; }
+  .legend-list li, .rules li, .rules p { font-size: 15px; }
+  .rules .legend-list { gap: 4px; }
+  .stat { padding: 4px 2px; }
+  .stat dd { font-size: 17px; }
+  .btn { font-size: 16px; padding: 8px 18px 6px; }
+  .credit { font-size: 12px; margin: 0; }
+  .share-status:empty { display: none; }
+  .phone-turn { width: 56px; height: 56px; }
+}
 @media (max-width: 380px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .btn, .icon-btn .wave { transition: none; } }
 </style>
@@ -348,7 +383,7 @@ kbd {
     <canvas id="game" aria-hidden="true"></canvas>
   </div>
 
-  <p class="footnote" id="footnote"><kbd>Space</kbd> or tap to jump &middot; hold for a higher leap &middot; <kbd>M</kbd> mutes &middot; Rules explains the scoring <span class="rotate-hint">&middot; turn your phone sideways for a bigger pitch</span></p>
+  <p class="footnote" id="footnote"><kbd>Space</kbd> or tap to jump &middot; hold for a higher leap &middot; <kbd>M</kbd> mutes &middot; Rules explains the scoring</p>
 
   <div class="overlay" id="startPanel">
     <div class="panel rules start" role="dialog" aria-labelledby="startTitle">
@@ -413,6 +448,19 @@ kbd {
     </div>
   </div>
 </div>
+
+  <div class="overlay rotate" id="rotatePanel" hidden>
+    <div class="panel" role="dialog" aria-labelledby="rotateTitle">
+      <svg class="phone-turn" viewBox="0 0 84 84" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <g class="phone"><rect x="27" y="10" width="30" height="64" rx="6"/><path d="M38 66h8"/></g>
+        <path d="M70 30a30 30 0 0 1-4 30" stroke-width="2.5" opacity="0.6"/><path d="M62 58l4 3 3-4" stroke-width="2.5" opacity="0.6"/>
+      </svg>
+      <p class="eyebrow">Wolfie needs the whole wing</p>
+      <h2 id="rotateTitle">Turn your phone sideways</h2>
+      <p>The pitch is much bigger in landscape, so you can see the tackles coming.</p>
+      <button class="btn secondary" id="rotateDismiss" type="button">Play in portrait anyway</button>
+    </div>
+  </div>
 
   <div class="overlay top" id="rulesPanel" hidden>
     <div class="panel rules" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
@@ -797,17 +845,23 @@ kbd {
 
   // ---------- rules page (pauses a run while open) ----------
   let paused = false, rulesReturn = null;
+  const rotatePanel = $('rotatePanel');
+  function updatePause() {
+    const was = paused;
+    paused = !rulesPanel.hidden || !rotatePanel.hidden;
+    if (paused && !was && player) { release(); player.buffer = 0; }
+  }
   function openRules() {
     if (!rulesPanel.hidden) return;
     rulesReturn = document.activeElement;
-    if (state === 'run') { paused = true; release(); player.buffer = 0; }
     rulesPanel.hidden = false;
+    updatePause();
     $('rulesClose').focus({ preventScroll: true });
   }
   function closeRules() {
     if (rulesPanel.hidden) return;
     rulesPanel.hidden = true;
-    paused = false;
+    updatePause();
     if (state === 'run') stage.focus({ preventScroll: true });
     else if (rulesReturn && rulesReturn.focus) rulesReturn.focus({ preventScroll: true });
   }
@@ -816,6 +870,28 @@ kbd {
   $('rulesClose').addEventListener('click', closeRules);
   $('rulesBack').addEventListener('click', closeRules);
   rulesPanel.addEventListener('pointerdown', e => { if (e.target === rulesPanel) closeRules(); });
+
+  // ---------- "turn your phone sideways" prompt for phones held upright ----------
+  const portraitPhone = window.matchMedia ? window.matchMedia('(orientation: portrait) and (pointer: coarse) and (max-width: 700px)') : null;
+  let rotateDismissed = false;
+  try { rotateDismissed = sessionStorage.getItem('wolfie-run-portrait-ok') === '1'; } catch (e) { /* ignore */ }
+  function checkOrientation() {
+    const show = !!(portraitPhone && portraitPhone.matches) && !rotateDismissed;
+    if (rotatePanel.hidden === !show) return;
+    rotatePanel.hidden = !show;
+    updatePause();
+    setTimeout(resize, 50);
+  }
+  $('rotateDismiss').addEventListener('click', () => {
+    rotateDismissed = true;
+    try { sessionStorage.setItem('wolfie-run-portrait-ok', '1'); } catch (e) { /* ignore */ }
+    checkOrientation();
+  });
+  if (portraitPhone) {
+    if (portraitPhone.addEventListener) portraitPhone.addEventListener('change', checkOrientation);
+    else if (portraitPhone.addListener) portraitPhone.addListener(checkOrientation);
+  }
+  window.addEventListener('orientationchange', () => setTimeout(() => { checkOrientation(); resize(); }, 150));
 
   // ---------- input ----------
   function press() {
@@ -830,6 +906,7 @@ kbd {
   window.addEventListener('keydown', e => {
     if (e.code === 'KeyM' && !e.repeat) { toggleMute(); return; }
     if (!rulesPanel.hidden) { if (e.code === 'Escape') closeRules(); return; }
+    if (!rotatePanel.hidden) return;
     if (!JUMP_KEYS.has(e.code)) return;
     // Let focused controls handle their own Space/Enter (avoids a double restart).
     if (e.target && e.target.closest && e.target.closest('button, a, textarea') && state !== 'run') return;
@@ -1451,6 +1528,7 @@ kbd {
 
   resize();
   reset();
+  checkOrientation();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { FONT_DISPLAY = cssVar('--display'); FONT_BODY = cssVar('--body'); resize(); });
   requestAnimationFrame(frame);
 })();
