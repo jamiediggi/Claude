@@ -15,6 +15,9 @@ mkdir -p dist
   printf '<meta property="og:type" content="website">\n'
   printf '<meta name="author" content="Jamie Clarke">\n'
   printf '<link rel="icon" href="data:image/svg+xml,%%3Csvg xmlns=%%27http://www.w3.org/2000/svg%%27 viewBox=%%270 0 64 64%%27%%3E%%3Crect width=%%2764%%27 height=%%2764%%27 rx=%%2712%%27 fill=%%27%%231d4ea3%%27/%%3E%%3Cpath d=%%27M14 18l18 18 18-18%%27 stroke=%%27%%23f2df6b%%27 stroke-width=%%278%%27 fill=%%27none%%27/%%3E%%3C/svg%%3E">\n'
+  printf '<!-- Fathom - beautiful, simple website analytics -->\n'
+  printf '<script src="https://cdn.usefathom.com/script.js" data-site="MZDNVPSG" defer></script>\n'
+  printf '<!-- / Fathom -->\n'
   printf '<style>body{margin:0}</style>\n</head>\n<body>\n'
   cat index.html
   printf '\n</body>\n</html>\n'
