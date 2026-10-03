@@ -631,14 +631,9 @@ kbd {
   }
 
   // ---------- sharing ----------
-  function shareUrl() {
-    const host = location.hostname || '';
-    const isPublic = /^https?:$/.test(location.protocol) && host && !/claude\.ai$|claudeusercontent|localhost|127\.0\.0\.1/.test(host);
-    return isPublic ? location.origin + location.pathname : SITE;
-  }
   async function shareScore() {
     const msg = 'I ran ' + lastMetres + ' m and scored ' + lastScore + ' in Wolfie Run 🐺 Can you beat it?';
-    const url = shareUrl(), full = msg + ' ' + url;
+    const url = SITE, full = msg + ' ' + url;
     const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     if (coarse && navigator.share) {
       try { await navigator.share({ title: 'Wolfie Run', text: msg, url }); shareStatus.textContent = 'Shared. Up the Wire!'; return; }
