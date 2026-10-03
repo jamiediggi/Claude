@@ -728,8 +728,14 @@ kbd {
   function floatText(x, y, text, col) { floaters.push({ x, y, text, col: col || C.primrose, life: 0.9 }); }
   function banner(big, small, dur, col) { ban = { big, small, t: dur, max: dur, col: col || C.primrose }; }
 
+  // ---------- analytics: Fathom events on the hosted site (no-op when Fathom isn't loaded) ----------
+  function track(name) {
+    try { if (window.fathom && typeof window.fathom.trackEvent === 'function') window.fathom.trackEvent(name); } catch (e) { /* ignore */ }
+  }
+
   // ---------- flow ----------
   function start() {
+    track('Game played');
     sfx.init();
     reset();
     state = 'run';
@@ -770,6 +776,7 @@ kbd {
 
   // ---------- sharing ----------
   async function shareScore() {
+    track('Share score pressed');
     const msg = 'I ran ' + lastMetres + ' m and scored ' + lastScore + ' in Wolfie Run 🐺 Can you beat it?';
     const url = SITE, full = msg + ' ' + url;
     const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
